@@ -74,7 +74,7 @@
 #set( $suppressPrefix = "custom.copilot" )
 ##
 #set( $copyright = "(C) 2010-2017 enso managers gmbh Berlin" )
-#set( $ac-version = "3.6" )
+#set( $acVersion = "3.6" )
 #set( $version   = "71")   
 #set( $specifVersion = "0.9.4" )
 #set( $timezone  = "+01:00" )
@@ -2260,7 +2260,7 @@ $output#end##macro
     "title": "${title}",
     "specifVersion": "${specifVersion}",
     "tool": "ARCWAY Cockpit",
-    "toolVersion": "${ac-version}",
+    "toolVersion": "${acVersion}",
     "rights": {
         "title": "Creative Commons 4.0 CC BY-SA",
         "type": "dcterms:rights",
