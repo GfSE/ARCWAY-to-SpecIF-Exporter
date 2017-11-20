@@ -76,6 +76,7 @@
 #set( $copyright = "(C) 2010-2017 enso managers gmbh Berlin" )
 #set( $ac-version = "3.6" )
 #set( $version   = "71")   
+#set( $specifVersion = "0.9.4" )
 #set( $timezone  = "+01:00" )
 #set( $templateTime = "2017-05-28T18:59:00" + $timezone )
 #set( $actualTime_MilliSecondsSince_01_01_1970 = $dateTimeProvider.getCurrentDateTime_MilliSecondsSince_01_01_1970() )
@@ -2257,7 +2258,7 @@ $output#end##macro
     "id": "$fileID",
 	"description": "#writeText( $project.getDescription() )",
     "title": "${title}",
-    "specifVersion": "0.9.2",
+    "specifVersion": "${specifVersion}",
     "tool": "ARCWAY Cockpit",
     "toolVersion": "${ac-version}",
     "rights": {
