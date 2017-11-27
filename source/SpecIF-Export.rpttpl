@@ -76,7 +76,7 @@
 #set( $copyright = "(C) 2010-2017 enso managers gmbh Berlin" )
 #set( $acVersion = "3.6" )
 #set( $version   = "71")   
-#set( $specifVersion = "0.9.4" )
+#set( $specifVersion = "0.9.5" )
 #set( $timezone  = "+01:00" )
 #set( $templateTime = "2017-05-28T18:59:00" + $timezone )
 #set( $actualTime_MilliSecondsSince_01_01_1970 = $dateTimeProvider.getCurrentDateTime_MilliSecondsSince_01_01_1970() )
@@ -2448,7 +2448,7 @@ $output#end##macro
         "id": "OT-${idFld}",
         "title": "$cfgTypeFolder",
         "description": "$cfgFolderDescription",
-        "creation": ["auto","manual"],
+        "instantiation": ["auto","user"],
 		"icon": "${iconFld}",
 		"isHeading": "true",
         "attributeTypes": [{
@@ -2472,7 +2472,7 @@ $output#end##macro
         "id": "OT-${idInf}",
         "title": "$cfgTypeInformation",
         "description": "$cfgInformationDescription",
-        "creation": ["auto","manual"],
+        "instantiation": ["auto","user"],
 		"icon": "${iconFld}",
         "attributeTypes": [{
             "id": "AT-${idInf}-Name",
@@ -2503,7 +2503,7 @@ $output#end##macro
         "id": "OT-${prefix}",
         "title": "$cfgTypePlan",
         "description": "$cfgPlanDescription",
-        "creation": ["auto"],
+        "instantiation": ["auto"],
 		"icon": "${iconPln}",
         "attributeTypes": [{
             "id": "AT-${prefix}-Name",
@@ -2540,7 +2540,7 @@ $output#end##macro
         "id": "OT-${idAct}",
         "title": "$cfgTypeActor",
         "description": "$cfgActorDescription",
-        "creation": ["auto"],
+        "instantiation": ["auto"],
 		"icon": "${iconAct}",
         "attributeTypes": [{
             "id": "AT-${idAct}-Name",
@@ -2566,7 +2566,7 @@ $output#end##macro
         "id": "OT-${idSta}",
         "title": "$cfgTypeState",
         "description": "$cfgStateDescription",
-        "creation": ["auto"],
+        "instantiation": ["auto"],
 		"icon": "${iconSta}",
         "attributeTypes": [{
             "id": "AT-${idSta}-Name",
@@ -2592,7 +2592,7 @@ $output#end##macro
         "id": "OT-${idEvt}",
         "title": "$cfgTypeEvent",
         "description": "$cfgEventDescription",
-        "creation": ["auto"],
+        "instantiation": ["auto"],
 		"icon": "${iconEvt}",
         "attributeTypes": [{
             "id": "AT-${idEvt}-Name",
@@ -2662,7 +2662,7 @@ $output#end##macro
 ##		"description": "$cfgRequirementDescription",
 		"icon": "${iconReq}",
 #end##if
-        "creation": ["manual"],
+        "instantiation": ["user"],
         "attributeTypes": [{
             "id": "AT-${prefix}-ID",
             "title": "$cfgTypeID",
@@ -2724,7 +2724,7 @@ $output#end##macro
         "id": "OT-${prefix}",
         "title": "$cfgTypeIssue",
         "description": "$cfgIssueDescription",
-        "creation": ["manual","auto"],
+        "instantiation": ["user","auto"],
 		"icon": "${iconIss}",
         "attributeTypes": [{
             "id": "AT-${prefix}-ID",
@@ -2776,7 +2776,7 @@ $output#end##macro
         "id": "RT-$cfgPlanShowsUniqueElementType",
         "title": "$cfgTypePlanShowsMEl",
         "description": "Relation: $cfgLabelPlan $cfgLabelPlanShowsUniqueElement $cfgLabelUniqueElement",
-        "creation": ["auto"],
+        "instantiation": ["auto"],
         "sourceTypes": ["OT-$idPln"],
         "targetTypes": ["OT-$idAct", "OT-$idSta", "OT-$idEvt"],
         "changedAt": "$templateTime"
@@ -2784,7 +2784,7 @@ $output#end##macro
         "id": "RT-$cfgMElContainsMElType",
         "title": "$cfgTypeMElContainsMEl",
         "description": "Relation: $cfgLabelUniqueElement $cfgLabelMElContainsMEl $cfgLabelUniqueElement",
-        "creation": ["auto"],
+        "instantiation": ["auto"],
         "sourceTypes": ["OT-$idAct", "OT-$idSta", "OT-$idEvt"],
         "targetTypes": ["OT-$idAct", "OT-$idSta", "OT-$idEvt"],
         "changedAt": "$templateTime"
@@ -2793,7 +2793,7 @@ $output#end##macro
         "title": "$cfgTypeMElWritesAndReadsMEl",
         "description": "Relation: $cfgLabelActor $cfgLabelMElWritesAndReadsMEl $cfgLabelState",
         "changedAt": "2016-05-26T08:59:00+02:00",
-        "creation": ["auto"],
+        "instantiation": ["auto"],
         "sourceTypes": ["OT-$idAct"],
         "targetTypes": ["OT-$idSta"],
         "changedAt": "$templateTime"
@@ -2801,7 +2801,7 @@ $output#end##macro
         "id": "RT-$cfgMElWritesMElType",
         "title": "$cfgTypeMElWritesMEl",
         "description": "Relation: $cfgLabelActor $cfgLabelMElWritesMEl $cfgLabelState",
-        "creation": ["auto"],
+        "instantiation": ["auto"],
         "sourceTypes": ["OT-$idAct"],
         "targetTypes": ["OT-$idSta"],
         "changedAt": "$templateTime"
@@ -2809,7 +2809,7 @@ $output#end##macro
         "id": "RT-$cfgMElReadsMElType",
         "title": "$cfgTypeMElReadsMEl",
         "description": "Relation: $cfgLabelActor $cfgLabelMElReadsMEl $cfgLabelState",
-        "creation": ["auto"],
+        "instantiation": ["auto"],
         "sourceTypes": ["OT-$idAct"],
         "targetTypes": ["OT-$idSta"],
         "changedAt": "$templateTime"
@@ -2841,7 +2841,7 @@ $output#end##macro
         "id": "RT-$cfgRequirementReferenceType",
         "title": "$cfgTypeRequirementReferring",
         "description": "Relation: $cfgLabelRequirement $cfgLabelRequirementReferring $cfgLabelRequirement",
-        "creation": ["manual"],
+        "instantiation": ["user"],
         "sourceTypes": [#writeReqIDs()],
         "targetTypes": [#writeReqIDs()],
         "changedAt": "$templateTime"
@@ -2850,7 +2850,7 @@ $output#end##macro
         "id": "RT-$cfgMElLinkedAnnotationType",
         "title": "$cfgTypeMElLinkedAnnotation",
         "description": "Relation: $cfgLabelAnnotation $cfgLabelMElLinkedAnnotation $cfgLabelUniqueElement",
-        "creation": ["manual", "auto"],
+        "instantiation": ["user", "auto"],
         "sourceTypes": ["OT-$idAnn"],
         "targetTypes": ["OT-$idAct", "OT-$idSta", "OT-$idEvt"],
         "changedAt": "$templateTime"
@@ -2858,7 +2858,7 @@ $output#end##macro
         "id": "RT-$cfgMElLinkedRequirementType",
         "title": "$cfgTypeMElLinkedRequirement",
         "description": "Relation: $cfgLabelUniqueElement $cfgLabelMElLinkedRequirement $cfgLabelRequirement",
-        "creation": ["manual", "auto"],
+        "instantiation": ["user", "auto"],
         "sourceTypes": ["OT-$idAct", "OT-$idSta", "OT-$idEvt"],
         "targetTypes": [#writeReqIDsWithoutAnn()],
         "changedAt": "$templateTime"
@@ -2867,7 +2867,7 @@ $output#end##macro
         "id": "RT-$cfgMElLinkedRequirementType",
         "title": "$cfgTypeMElLinkedRequirement",
         "description": "Relation: $cfgLabelUniqueElement $cfgLabelMElLinkedRequirement $cfgLabelRequirement",
-        "creation": ["manual", "auto"],
+        "instantiation": ["user", "auto"],
         "sourceTypes": ["OT-$idAct", "OT-$idSta", "OT-$idEvt"],
         "targetTypes": [#writeReqIDs()],
         "changedAt": "$templateTime"
@@ -2878,7 +2878,7 @@ $output#end##macro
         "id": "RT-$cfgIssueLinkType",
         "title": "$cfgTypeRequirementLink",
         "description": "Relation: $cfgLabelIssueType $cfgLabelIssueLink $cfgLabelPlan/$cfgLabelUniqueElement/$cfgLabelRequirement",
-        "creation": ["manual", "auto"],
+        "instantiation": ["user", "auto"],
         "sourceTypes": ["OT-$idIss"],
         "targetTypes": ["OT-$idPln", "OT-$idAct", "OT-$idSta", "OT-$idEvt", #writeReqIDs()],
         "changedAt": "$templateTime"
