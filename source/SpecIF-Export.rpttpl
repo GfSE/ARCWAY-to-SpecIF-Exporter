@@ -2450,7 +2450,7 @@ $output#end##macro
         "description": "$cfgFolderDescription",
         "instantiation": ["auto","user"],
 		"icon": "${iconFld}",
-		"isHeading": "true",
+		"isHeading": true,
         "attributeTypes": [{
             "id": "AT-${idFld}-Name",
             "title": "$cfgTypeTitle",
@@ -2913,7 +2913,7 @@ $output#end##macro
 ## The project information:
 #set( $fileName = $project.getLogo() )
         "id": "${idInf}-${projectID}-info",
-        "title": "$cfgTypeInformation",
+        "title": "$cfgProjectInformationChapterTitle",
         "objectType": "OT-${idInf}",
         "attributes": [{
             "title": "$cfgTypeTitle",
