@@ -1032,16 +1032,16 @@ $output.replaceAll('\"', '\\\"')#end##macro
 ## iterate through all custom properties:
 #foreach( $customPropertyID in $customProperties )
 #if( !$customPropertyID.startsWith( $suppressPrefix ))
-	#set ( $displayNameOfProperty = $dataModelProvider.getDisplaynameOfProperty($item.getTypeID(), $customPropertyID ) )
-	#set ( $typeID = $dataModelProvider.getDatatypeIDOfProperty( $item.getTypeID(), $customPropertyID ) )
-	#isoTimeOfDateOfLastModification( $item, $date )
+#set ( $displayNameOfProperty = $dataModelProvider.getDisplaynameOfProperty($item.getTypeID(), $customPropertyID ) )
+#set ( $typeID = $dataModelProvider.getDatatypeIDOfProperty( $item.getTypeID(), $customPropertyID ) )
+#isoTimeOfDateOfLastModification( $item, $date )
 	#if( $item.hasPropertyValue( $customPropertyID ) )
 	#if( !$typeID.equals("file") || !$cfgFile_EmbeddedInObjectText )
         }, {
             "propertyType": "PT-${prefixId}-${customPropertyID}",
 	#end
 	#if ( $typeID.equals("boolean") )
-		#set( $temp = $item.getPropertyAsString( $customPropertyID ) )
+#set( $temp = $item.getPropertyAsString( $customPropertyID ) )
 		#if( $temp == "wahr" ) #set( $temp = "true" ) #elseif( $temp == "falsch" ) #set( $temp = "false" ) #end
             "value": "$temp"
 	#elseif ( $typeID.equals("integer") )
@@ -1071,11 +1071,11 @@ $output.replaceAll('\"', '\\\"')#end##macro
 		#if( $cfgFile_EmbeddedInObjectText )
 		## File is embedded in description property (dcterms:description or ReqIF.Text)
 		#else
-		## Export the file and write property with reference
-		#set( $fileName = $item.getFileProperty( $customPropertyID ) )
-		#mimeType( $fileName, $fileType )
-		#set( $output = '<div><object type=\"'+${fileType}+'\" data=\"'+${fileName}+'\">'+${item.getName()}+'</object></div>' )
-            "value": "${output}"
+## Export the file and write property with reference
+#set( $fileName = $item.getFileProperty( $customPropertyID ).replaceAll('\\', '\\\\') )
+##set( $fileName = $fileName.replaceAll('\\', '\\\\') )
+#mimeType( $fileName, $fileType )
+            "value": "<div><object type=\"${fileType}\" data=\"${fileName}\">${item.getName()}</object></div>"
 		#end
     #end##if
     #end##if
@@ -1122,7 +1122,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
         }, {
             "title": "$cfgTypePlan",
             "propertyType": "PT-${prefix}-Diagram",
-            "value": "<div><object type=\"$planFileType\" data=\"$fileName\">${plan.getName()}</object></div>"
+            "value": "<div><object type=\"${planFileType}\" data=\"${fileName}\">${plan.getName()}</object></div>"
 #end##if
         }, {
             "title": "$cfgTypeNotation",
