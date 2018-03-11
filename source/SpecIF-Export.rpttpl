@@ -75,8 +75,8 @@
 ##
 #set( $copyright = "(C) 2010-2017 enso managers gmbh Berlin" )
 #set( $acVersion = "3.6" )
-#set( $version   = "73")   
-#set( $specifVersion = "0.10.0" )
+#set( $version   = "74")   
+#set( $specifVersion = "0.10.3" )
 #set( $timezone  = "+01:00" )
 #set( $templateTime = "2017-05-28T18:59:00" + $timezone )
 #set( $actualTime_MilliSecondsSince_01_01_1970 = $dateTimeProvider.getCurrentDateTime_MilliSecondsSince_01_01_1970() )
@@ -166,7 +166,7 @@
 #set( $cfgTypeMElLinkedRequirement = "oslc_rm:satisfies")
 #set( $cfgTypeMElLinkedAnnotation = "IR:refersTo")
 #set( $cfgTypeMElContainsMEl = "SpecIF:contains" )     
-#set( $cfgTypeMElWritesAndReadsMEl = "SpecIF:modifies" ) 
+#set( $cfgTypeMElWritesAndReadsMEl = "SpecIF:stores" ) 
 #set( $cfgTypeMElWritesMEl = "SpecIF:writes" ) 
 #set( $cfgTypeMElReadsMEl = "SpecIF:reads" )  
 #set( $cfgTypePlanShowsMEl = "SpecIF:shows" )
@@ -235,18 +235,17 @@
 #set( $cfgInformationDescription = "Information with title and text for descriptive paragraphs." )
 #set( $cfgPlanDescription = "A 'Plan' is a graphical model view with a specific communication purpose, e.g. a business process or system composition." )
 #set( $cfgActorDescription = "An 'Actor' is a fundamental model element type representing an active entity, be it an activity, a process step, a function, a system component or a role." )
-#set( $cfgStateDescription = "A 'State' is a fundamental model element type representing a passive entity, be it a value, a condition, an information storage or even a physical shape." )
+#set( $cfgStateDescription = "A 'State' is a fundamental model element type representing a passive entity, be it a value, a document, an information storage or even a physical shape." )
 #set( $cfgEventDescription = "An 'Event' is a fundamental model element type representing a time reference, a change in condition/value or more generally a synchronisation primitive." )
 #set( $cfgRequirementDescription = "A 'Requirement' is a singular documented physical and functional need that a particular design, product or process must be able to perform." )
 #set( $cfgFeatureDescription = "A 'Feature' is an intentional distinguishing characteristic of a system, often a unique selling proposition." )
-#set( $cfgAnnotationDescription = "A Interaction-Room 'Annotation' indicates a point of special interest. Examples are customer or user value, product features with prominent benefit/effort and challenges during development." )
+#set( $cfgAnnotationDescription = "An Interaction-Room 'Annotation' indicates a point of special interest. Examples are customer or user value, product features with prominent benefit,effort or challenges during development." )
 #set( $cfgSpecDescription = "Root node of a specification (outline)." )
 #set( $cfgIssueDescription = "An 'Issue' is a question to answer or decision to take which is worth tracking." )
 ##set( $cfgLabelAppendedRelations = "Statements" )
 ##
 #set( $cfgLabelUniqueElement = "Model-Element" )
 #set( $cfgPlanShowsUniqueElementType = "Visibility" )
-##set( $cfgLabelPlanShowsUniqueElementType = "Visibility" )
 #set( $cfgLabelPlanShowsUniqueElement = "shows")
 ##set( $cfgLabelMElOnPlan = "is visible on")
 ##set( $cfgLabelUniqueElementRequirements = "Requirements" )
@@ -254,21 +253,16 @@
 ##set( $cfgLabelUniqueElementUseCases = "Use cases" )
 ##set( $cfgLabelUniqueElementUseCaseSteps = "Use case steps" )
 #set( $cfgMElLinkedRequirementType = "Satisfaction")
-##set( $cfgLabelMElLinkedRequirementType = "Satisfaction")
 #set( $cfgLabelMElLinkedRequirement = "satisfies")
 #set( $cfgLabelMElLinkedAnnotation = "refers to")
 #set( $cfgMElLinkedAnnotationType = "Annotation")
 #set( $cfgMElContainsMElType = "Containment" )
-##set( $cfgLabelMElContainsMElType = "Containment" )
 #set( $cfgLabelMElContainsMEl = "contains" )
 #set( $cfgMElWritesAndReadsMElType = "Storage" )
-##set( $cfgLabelMElWritesAndReadsMElType = "Storage" )
-#set( $cfgLabelMElWritesAndReadsMEl = "writes and reads" )
+#set( $cfgLabelMElWritesAndReadsMEl = "stores" )
 #set( $cfgMElWritesMElType = "Writing" )
-##set( $cfgLabelMElWritesMElType = "Writing" )
 #set( $cfgLabelMElWritesMEl = "writes" )
 #set( $cfgMElReadsMElType = "Reading" )
-##set( $cfgLabelMElReadsMElType = "Reading" )
 #set( $cfgLabelMElReadsMEl = "reads" )
 ##
 #set( $cfgLabelFolder = "Folder" )
@@ -351,7 +345,7 @@
 #set( $cfgInformationDescription = "Information mit Titel und Text für Textpassagen." )
 #set( $cfgPlanDescription = "Ein 'Plan' ist eine graphische Modellsicht zur Vermittlung eines bestimmten Sachverhalts, z.B. ein Geschäftsprozess oder Systemaufbau." )
 #set( $cfgActorDescription = "Ein 'Akteur' ist ein fundamentaler Modellelement-Typ für ein aktives Objekt, z.B. eine Aktivität, ein Prozess-Schritt, eine Funktion, eine Systemkomponente oder eine Rolle." )
-#set( $cfgStateDescription = "Ein 'Zustand' ist ein fundamentaler Modellelement-Typ für ein passives Objekt, z.B. ein Wert, eine Bedingung, ein Informationsspeicher oder eine physische Beschaffenheit." )
+#set( $cfgStateDescription = "Ein 'Zustand' ist ein fundamentaler Modellelement-Typ für ein passives Objekt, z.B. ein Wert, ein Dokument, ein Informationsspeicher oder eine physische Beschaffenheit." )
 #set( $cfgEventDescription = "Ein 'Ereignis' ist ein fundamentaler Modellelement-Typ für eine zeitliche Referenz, eine Änderung einer Bedingung bzw. eines Zustandes oder generell ein Synchronisations-Mittel." )
 #set( $cfgRequirementDescription = "Eine 'Anforderung' ist ein einzelnes dokumentiertes physisches oder funktionales Bedürfnis, das der betreffende Entwurf, das Produkt oder der Prozess erfüllen muss." )
 #set( $cfgFeatureDescription = "Ein 'Produktmerkmal' ist eine beabsichtigte differenzierende Eigenschaft eines Systems, oft ein Alleinstellungsmerkmal." )
@@ -362,7 +356,6 @@
 ##
 #set( $cfgLabelUniqueElement = "Modellelement" )
 ##set( $cfgPlanShowsUniqueElementType = "Visualisierung" )
-##set( $cfgLabelPlanShowsUniqueElementType = "Visualisierung" )
 #set( $cfgLabelPlanShowsUniqueElement = "zeigt")   
 ##set( $cfgLabelMElOnPlan = "ist sichtbar auf")   
 #set( $cfgLabelUniqueElementRequirements = "Anforderungen" )
@@ -370,20 +363,15 @@
 ##set( $cfgLabelUniqueElementUseCases = "Nutzungsfälle" )
 ##set( $cfgLabelUniqueElementUseCaseSteps = "Use case steps" )
 ##set( $cfgMElLinkedRequirementType = "Satisfaction")
-##set( $cfgLabelMElLinkedRequirementType = "Erfüllen")
 #set( $cfgLabelMElLinkedRequirement = "erfüllt")
 #set( $cfgLabelMElLinkedAnnotation = "bezieht sich auf")
 ##set( $cfgMElContainsMElType = "Containment" )
-##set( $cfgLabelMElContainsMElType = "Enthaltensein" )
 #set( $cfgLabelMElContainsMEl = "enthält" )
 ##set( $cfgMElWritesAndReadsMElType = "Storage" )
-##set( $cfgLabelMElWritesAndReadsMElType = "Speicher" )
-#set( $cfgLabelMElWritesAndReadsMEl = "schreibt und liest" )
+#set( $cfgLabelMElWritesAndReadsMEl = "speichert" )
 ##set( $cfgMElWritesMElType = "Writing" )
-##set( $cfgLabelMElWritesMElType = "Schreiben" )
 #set( $cfgLabelMElWritesMEl = "schreibt" )
 ##set( $cfgMElReadsMElType = "Reading" )
-##set( $cfgLabelMElReadsMElType = "Lesen" )
 #set( $cfgLabelMElReadsMEl = "liest" )
 ##
 #set( $cfgLabelFolder = "Ordner" )
@@ -1320,14 +1308,8 @@ $output.replaceAll('\"', '\\\"')#end##macro
         "title": "$cfgTypePlanShowsMEl",
 		"description": "'${plan.getName()}' $cfgLabelPlanShowsUniqueElement '${MEl.getName()}'",
         "statementType": "ST-$cfgPlanShowsUniqueElementType",
-        "subject": {
-            "id": "${idPln}-$plan.getUniqueIdentifier()",
-            "revision": 0
-        },
-        "object": {
-            "id": "${idMEl}-$MEl.getUniqueIdentifier()",
-            "revision": 0
-        },
+        "subject": "${idPln}-$plan.getUniqueIdentifier()",
+        "object": "${idMEl}-$MEl.getUniqueIdentifier()",
 #isoTimeOfDateOfLastModification( $plan, $date )
         "changedAt": "$date"
 #end##if
@@ -1352,14 +1334,8 @@ $output.replaceAll('\"', '\\\"')#end##macro
         "title": "$cfgTypeMElContainsMEl",
 		"description": "'${uniqueElement.getName()}' $cfgLabelMElContainsMEl '${MEl.getName()}'",
         "statementType": "ST-$cfgMElContainsMElType",
-        "subject": {
-            "id": "${idMEl}-$uniqueElement.getUniqueIdentifier()",
-            "revision": 0
-        },
-        "object": {
-            "id": "${idMEl}-$MEl.getUniqueIdentifier()",
-            "revision": 0
-        },
+        "subject": "${idMEl}-$uniqueElement.getUniqueIdentifier()",
+        "object": "${idMEl}-$MEl.getUniqueIdentifier()",
         "changedAt": "$actualTime"
 #end##if
 #end##foreach
@@ -1377,28 +1353,16 @@ $output.replaceAll('\"', '\\\"')#end##macro
         "title": "$cfgTypeMElWritesMEl",
 		"description": "'${uniqueElement.getName()}' $cfgLabelMElWritesMEl '${MEl.getName()}'",
         "statementType": "ST-$cfgMElWritesMElType",
-        "subject": {
-            "id": "${idMEl}-$uniqueElement.getUniqueIdentifier()",
-            "revision": 0
-        },
-        "object": {
-            "id": "${idMEl}-$MEl.getUniqueIdentifier()",
-            "revision": 0
-        },
+        "subject": "${idMEl}-$uniqueElement.getUniqueIdentifier()",
+        "object": "${idMEl}-$MEl.getUniqueIdentifier()",
         "changedAt": "$actualTime"
     }, {
         "id": "${idMElReadsMElType}-${idMEl}-${uniqueElement.getUniqueIdentifier()}-${idMEl}-$MEl.getUniqueIdentifier()",
         "title": "$cfgTypeMElReadsMEl",
 		"description": "'${uniqueElement.getName()}' $cfgLabelMElReadsMEl '${MEl.getName()}'",
         "statementType": "ST-$cfgMElReadsMElType",
-        "subject": {
-            "id": "${idMEl}-$uniqueElement.getUniqueIdentifier()",
-            "revision": 0
-        },
-        "object": {
-            "id": "${idMEl}-$MEl.getUniqueIdentifier()",
-            "revision": 0
-        },
+        "subject": "${idMEl}-$uniqueElement.getUniqueIdentifier()",
+        "object": "${idMEl}-$MEl.getUniqueIdentifier()",
         "changedAt": "$actualTime"
 #end##if
 #end##foreach
@@ -1414,14 +1378,8 @@ $output.replaceAll('\"', '\\\"')#end##macro
         "title": "$cfgTypeMElWritesMEl",
 		"description": "'${uniqueElement.getName()}' $cfgLabelMElWritesMEl '${MEl.getName()}'",
         "statementType": "ST-$cfgMElWritesMElType",
-        "subject": {
-            "id": "${idMEl}-$uniqueElement.getUniqueIdentifier()",
-            "revision": 0
-        },
-        "object": {
-            "id": "${idMEl}-$MEl.getUniqueIdentifier()",
-            "revision": 0
-        },
+        "subject": "${idMEl}-$uniqueElement.getUniqueIdentifier()",
+        "object": "${idMEl}-$MEl.getUniqueIdentifier()",
         "changedAt": "$actualTime"
 #end##if
 #end##foreach
@@ -1437,14 +1395,8 @@ $output.replaceAll('\"', '\\\"')#end##macro
         "title": "$cfgTypeMElReadsMEl",
 		"description": "'${uniqueElement.getName()}' $cfgLabelMElReadsMEl '${MEl.getName()}'",
         "statementType": "ST-$cfgMElReadsMElType",
-        "subject": {
-            "id": "${idMEl}-$uniqueElement.getUniqueIdentifier()",
-            "revision": 0
-        },
-        "object": {
-            "id": "${idMEl}-$MEl.getUniqueIdentifier()",
-            "revision": 0
-        },
+        "subject": "${idMEl}-$uniqueElement.getUniqueIdentifier()",
+        "object": "${idMEl}-$MEl.getUniqueIdentifier()",
         "changedAt": "$actualTime"
 #end##if
 #end##foreach
@@ -1510,28 +1462,16 @@ $MEl.getName()
         "title": "$cfgTypeMElLinkedAnnotation",
 		"description": "'$req.getName()' $cfgLabelMElLinkedAnnotation '$MEl.getName()'",
         "statementType": "ST-$cfgMElLinkedAnnotationType",
-        "subject": {
-            "id": "${prefix}-$req.getUniqueIdentifier()",
-            "revision": 0
-        },
-        "object": {
-            "id": "${idMEl}-$MEl.getUniqueIdentifier()",
-            "revision": 0
-        },
+        "subject": "${prefix}-$req.getUniqueIdentifier()",
+        "object": "${idMEl}-$MEl.getUniqueIdentifier()",
         "changedAt": "$actualTime"
 #else
         "id": "${idMElLinkedRequirementType}-${idMEl}-${MEl.getUniqueIdentifier()}-${prefix}-$req.getUniqueIdentifier()",
         "title": "$cfgTypeMElLinkedRequirement",
 		"description": "'${MEl.getName()}' $cfgLabelMElLinkedRequirement '${req.getName()}'",
         "statementType": "ST-$cfgMElLinkedRequirementType",
-        "subject": {
-            "id": "${idMEl}-$MEl.getUniqueIdentifier()",
-            "revision": 0
-        },
-        "object": {
-            "id": "${prefix}-$req.getUniqueIdentifier()",
-            "revision": 0
-        },
+        "subject": "${idMEl}-$MEl.getUniqueIdentifier()",
+        "object": "${prefix}-$req.getUniqueIdentifier()",
         "changedAt": "$actualTime"
 #end
 #end##if
@@ -1556,14 +1496,8 @@ $MEl.getName()
         "title": "$cfgTypeRequirementReferring",
 		"description": "'${req.getName()}' $cfgLabelRequirementReferring '${target.getName()}'",
         "statementType": "ST-$cfgRequirementReferenceType",
-        "subject": {
-            "id": "${prefix}-$req.getUniqueIdentifier()",
-            "revision": 0
-        },
-        "object": {
-            "id": "${prefixTarget}-$target.getUniqueIdentifier()",
-            "revision": 0
-        },
+        "subject": "${prefix}-$req.getUniqueIdentifier()",
+        "object": "${prefixTarget}-$target.getUniqueIdentifier()",
         "changedAt": "$actualTime"
 #end##if
 #end
@@ -1586,14 +1520,8 @@ $MEl.getName()
         "title": "$cfgTypeIssueLink",
 		"description": "'${issue.getTitle()}' $cfgLabelIssueLink '${target.getDisplayName()}'",
         "statementType": "ST-$cfgIssueLinkType",
-        "subject": {
-            "id": "${idIss}-$issue.getUniqueIdentifier()",
-            "revision": 0
-        },
-        "object": {
-            "id": "${prefixTarget}-$target.getUniqueIdentifier()",
-            "revision": 0
-        },
+        "subject": "${idIss}-$issue.getUniqueIdentifier()",
+        "object": "${prefixTarget}-$target.getUniqueIdentifier()",
         "changedAt": "$actualTime"
 #end##if
 #end
@@ -1613,14 +1541,8 @@ $MEl.getName()
         "title": "$cfgTypeIssueLink",
 		"description": "'${issue.getTitle()}' $cfgLabelIssueLink '${target.getDisplayName()}'",
         "statementType": "ST-$cfgIssueLinkType",
-        "subject": {
-            "id": "${idIss}-$issue.getUniqueIdentifier()",
-            "revision": 0
-        },
-        "object": {
-            "id": "${idMEl}-$target.getUniqueIdentifier()",
-            "revision": 0
-        },
+        "subject": "${idIss}-$issue.getUniqueIdentifier()",
+        "object": "${idMEl}-$target.getUniqueIdentifier()",
         "changedAt": "$actualTime"
 #end##if
 #end##foreach
@@ -2331,6 +2253,7 @@ $output#end##macro
         "id": "DT-FormattedText",
         "title": "Formatted Text",
         "type": "xhtml",
+        "maxLength": $stringMaxLength,
         "changedAt": "$templateTime"
 #if( $projectHasReqs )
     }, {
@@ -2449,7 +2372,9 @@ $output#end##macro
         "title": "$cfgTypeFolder",
         "description": "$cfgFolderDescription",
         "instantiation": ["auto","user"],
+#if( $iconFld.length()>0 )
 		"icon": "${iconFld}",
+#end
 		"isHeading": true,
         "propertyTypes": [{
             "id": "PT-${idFld}-Name",
@@ -2473,7 +2398,9 @@ $output#end##macro
         "title": "$cfgTypeInformation",
         "description": "$cfgInformationDescription",
         "instantiation": ["auto","user"],
+#if( $iconFld.length()>0 )
 		"icon": "${iconFld}",
+#end
         "propertyTypes": [{
             "id": "PT-${idInf}-Name",
             "title": "$cfgTypeTitle",
@@ -2504,7 +2431,9 @@ $output#end##macro
         "title": "$cfgTypePlan",
         "description": "$cfgPlanDescription",
         "instantiation": ["auto"],
+#if( $iconPln.length()>0 )
 		"icon": "${iconPln}",
+#end
         "propertyTypes": [{
             "id": "PT-${prefix}-Name",
             "title": "$cfgTypeTitle",
@@ -2541,7 +2470,9 @@ $output#end##macro
         "title": "$cfgTypeActor",
         "description": "$cfgActorDescription",
         "instantiation": ["auto"],
+#if( $iconAct.length()>0 )
 		"icon": "${iconAct}",
+#end
         "propertyTypes": [{
             "id": "PT-${idAct}-Name",
             "title": "$cfgTypeTitle",
@@ -2567,7 +2498,9 @@ $output#end##macro
         "title": "$cfgTypeState",
         "description": "$cfgStateDescription",
         "instantiation": ["auto"],
+#if( $iconSta.length()>0 )
 		"icon": "${iconSta}",
+#end
         "propertyTypes": [{
             "id": "PT-${idSta}-Name",
             "title": "$cfgTypeTitle",
@@ -2593,7 +2526,9 @@ $output#end##macro
         "title": "$cfgTypeEvent",
         "description": "$cfgEventDescription",
         "instantiation": ["auto"],
+#if( $iconEvt.length()>0 )
 		"icon": "${iconEvt}",
+#end
         "propertyTypes": [{
             "id": "PT-${idEvt}-Name",
             "title": "$cfgTypeTitle",
@@ -2626,7 +2561,9 @@ $output#end##macro
         "id": "RT-${prefix}",
         "title": "$cfgTypeRequirement",
         "description": "$cfgRequirementDescription",
+#if( $iconReq.length()>0 )
 		"icon": "${iconReq}",
+#end
 	#else
 ## Requirement categories have been defined; the default category carries all custom properties.
 ## The default should not be used, but it can be used in AC, so we provide a type:
@@ -2634,7 +2571,6 @@ $output#end##macro
         "id": "RT-${prefix}",
         "title": "${cfgLabelRequirement} (default)",
 ##		"description": "$cfgRequirementDescription",
-		"icon": "",
 	#end
 ## Here the defined categories are processed, if there are any:
 #elseif( $categoryID.equals($cfgReqCategoryRequirement) )
@@ -2642,25 +2578,33 @@ $output#end##macro
         "id": "RT-${prefix}",
         "title": "$cfgTypeRequirement",
         "description": "$cfgRequirementDescription",
+#if( $iconReq.length()>0 )
 		"icon": "${iconReq}",
+#end
 #elseif( $categoryID.equals($cfgReqCategoryFeature) )
 	#set ( $prefix = "${idFea}" )
         "id": "RT-${prefix}",
         "title": "$cfgTypeFeature",
         "description": "$cfgFeatureDescription",
+#if( $iconFea.length()>0 )
 		"icon": "${iconFea}",
+#end
 #elseif( $categoryID.equals($cfgReqCategoryAnnotation) )
 	#set ( $prefix = "${idAnn}" )
         "id": "RT-${prefix}",
         "title": "$cfgTypeAnnotation",
         "description": "$cfgAnnotationDescription",
+#if( $iconAnn.length()>0 )
 		"icon": "${iconAnn}",
+#end
 #else
 	#set ( $prefix = "${idReq}-${categoryID}" )
         "id": "RT-${prefix}",
         "title": "$dataModelProvider.getDisplaynameOfCategory( 'gm.requirementsmodule3.requirement', $categoryID )",
 ##		"description": "$cfgRequirementDescription",
+#if( $iconReq.length()>0 )
 		"icon": "${iconReq}",
+#end
 #end##if
         "instantiation": ["user"],
         "propertyTypes": [{
@@ -2725,7 +2669,9 @@ $output#end##macro
         "title": "$cfgTypeIssue",
         "description": "$cfgIssueDescription",
         "instantiation": ["user","auto"],
+#if( $iconIss.length()>0 )
 		"icon": "${iconIss}",
+#end
         "propertyTypes": [{
             "id": "PT-${prefix}-ID",
             "title": "$cfgTypeID",
