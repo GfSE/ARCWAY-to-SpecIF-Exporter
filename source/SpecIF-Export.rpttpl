@@ -59,7 +59,8 @@
 ##
 #set( $planFileTypeSvg = "image/svg+xml" )
 #set( $planFileTypePng = "image/png" )
-#set( $planFileType = $planFileTypeSvg )
+#set( $planFileType = $planFileTypePng )
+#set( $planFilePngToo = false )
 ##
 ## if true: plans are appended to description properties, or as an additional property, otherwise:
 #set( $cfgPlan_EmbeddedInObjectText = false )
@@ -491,6 +492,7 @@
 ## First set the defaults for all allowed values of the enumerated data type:
 #foreach( $val in $dataModelProvider.getAllowedValuesOfCustomProperty( $itemType, $customPropertyID ) )
 	#if( $val == "ReqIF: svg" ) #set( $planFileType = $planFileTypePng )
+	#elseif( $val == "ReqIF: png" ) #set( $planFilePngToo = false )
 	#elseif( $val == "ReqIF: Text attributes as XHTML" ) #set( $cfgTextAttributesAsXHTML = false )
 	#elseif( $val == "ReqIF: Plan embedded in object-text" ) #set( $cfgPlan_EmbeddedInObjectText = false )
 	#elseif( $val == "ReqIF: File embedded in object-text" ) #set( $cfgFile_EmbeddedInObjectText = false )
@@ -500,6 +502,7 @@
 ## Now, set the specified ('checked') values:
 #foreach( $val in $item.getPropertyAsStringList( $customPropertyID ) )
 	#if( $val == "ReqIF: svg" ) #set( $planFileType = $planFileTypeSvg )
+	#elseif( $val == "ReqIF: png" ) #set( $planFilePngToo = true )
 	#elseif( $val == "ReqIF: Text attributes as XHTML" ) #set( $cfgTextAttributesAsXHTML = true )
 	#elseif( $val == "ReqIF: Plan embedded in object-text" ) #set( $cfgPlan_EmbeddedInObjectText = true )
 	#elseif( $val == "ReqIF: File embedded in object-text" ) #set( $cfgFile_EmbeddedInObjectText = true )
@@ -1090,13 +1093,13 @@ $output.replaceAll('\"', '\\\"')#end##macro
 ##end
 ##
 ## Export the plan diagram:
+#if( $planFileType == $planFileTypePng || $planFilePngToo )
+#set( $fileName = $plan.getPNGFile() )
+#end
 #if( $planFileType == $planFileTypeSvg )
 ##set( $fileName = $plan.getSVGFile() )
-##set( $fileName = $plan.getImage() )
 #set( $fileName = $plan.getImageWithPresentationRule($planPresentationRule) )
-#else
-#set( $fileName = $plan.getPNGFile() )
-#end##if
+#end
     }, {
         "id": "${prefix}-$plan.getUniqueIdentifier()",
         "title": "$plan.getName()",
@@ -2077,7 +2080,7 @@ $MEl.getName()
 ############################################################################
 #macro( writeStakeholders $stakeholders )
 #if( $arrayHelper.getArraySize( $stakeholders ) > 0 )
-#set( $output = "<p>${cfgStakeholderChapterTitle}:</p>" )
+#set( $output = "<p class=\"inline-label\">${cfgStakeholderChapterTitle}:</p>" )
 ##	<table style="width=100%; margin=0 0 0 0;" border="1" cellspacing="0" cellpadding="4">
 ##	<table border="1" cellspacing="0" cellpadding="4">
 #set( $output = $output + '<table class=\"stdInlineWithBorder\">' )
@@ -2107,7 +2110,7 @@ $output#end##if
 ##
 ############################################################################
 #macro( writeLegend )
-#set( $output = "<p>${cfgLegendChapterTitle}:</p>" )
+#set( $output = '<p class=\"inline-label\">${cfgLegendChapterTitle}:</p>' )
 #set( $output = $output + "<p>${cfgLabelLegendDescription}</p>" )
 ##	<table style="width=100%; margin=0 0 0 0;" border="1" cellspacing="0" cellpadding="4">
 ##	<table border="1" cellspacing="0" cellpadding="4">
