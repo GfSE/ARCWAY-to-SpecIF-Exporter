@@ -100,11 +100,14 @@
 #set( $idPlanShowsUniqueElementType = "SVis" )
 #set( $idMElContainsMElType = "SCtn" )
 #set( $idMElPrecedesMElType = "SPre" )
-#set( $idMElWritesAndReadsMElType = "SWriRea" )
+##set( $idMElWritesAndReadsMElType = "SSto" )
 #set( $idMElWritesMElType = "SWri" )
 #set( $idMElReadsMElType = "SRea" )
+##set( $idMElCommunicatesWithMElType = "SCom" )
+#set( $idMElSendsToMElType = "SSnd" )
+#set( $idMElReceivesFromMElType = "SRcv" )
 #set( $idMElLinkedRequirementType = "SSat" )
-#set( $idMElLinkedAnnotationType = "SAnR" )
+#set( $idMElLinkedAnnotationType = "SAnn" )
 #set( $idRequirementReferenceType = "SDep" )
 #set( $idIssueLinkType = "SCnc" )
 ## UTF-8 characters used as Icons in resource names:
@@ -172,6 +175,9 @@
 #set( $cfgTypeMElWritesAndReadsMEl = "SpecIF:stores" ) 
 #set( $cfgTypeMElWritesMEl = "SpecIF:writes" ) 
 #set( $cfgTypeMElReadsMEl = "SpecIF:reads" )  
+##set( $cfgTypeMElCommunicatesWithMEl = "SpecIF:communicatesWith" )
+#set( $cfgTypeMElSendsToMEl = "SpecIF:sendsTo" )
+#set( $cfgTypeMElReceivesFromMEl = "SpecIF:receivesFrom" )
 #set( $cfgTypePlanShowsMEl = "SpecIF:shows" )
 #set( $cfgTypeRequirementReferring = "SpecIF:dependsOn" )
 #set( $cfgTypeRequirementLink = "SpecIF:refersTo" )
@@ -269,6 +275,12 @@
 #set( $cfgLabelMElWritesMEl = "writes" )
 #set( $cfgMElReadsMElType = "Reading" )
 #set( $cfgLabelMElReadsMEl = "reads" )
+##set( $cfgMElCommunicatesWithMElType = "Communication" )
+##set( $cfgLabelMElCommunicatesWithMEl = "communicates with" )
+#set( $cfgMElSendsToMElType = "Sending" )
+#set( $cfgLabelMElSendsToMEl = "sends to" )
+#set( $cfgMElReceivesFromMElType = "Receiving" )
+#set( $cfgLabelMElReceivesFromMEl = "receives from" )
 ##
 #set( $cfgLabelFolder = "Folder" )
 ##set( $cfgRequirementsChapterTitle = "Requirements" )
@@ -379,6 +391,12 @@
 #set( $cfgLabelMElWritesMEl = "schreibt" )
 ##set( $cfgMElReadsMElType = "Reading" )
 #set( $cfgLabelMElReadsMEl = "liest" )
+##set( $cfgMElCommunicatesWithMElType = "Communication" )
+##set( $cfgLabelMElCommunicatesWithMEl = "kommuniziert mit" )
+##set( $cfgMElSendsToMElType = "Sending" )
+#set( $cfgLabelMElSendsToMEl = "sendet an" )
+##set( $cfgMElReceivesFromMElType = "Receiving" )
+#set( $cfgLabelMElReceivesFromMEl = "empfängt von" )
 ##
 #set( $cfgLabelFolder = "Ordner" )
 ##set( $cfgRequirementsChapterTitle = "Anforderungen" )
@@ -1303,7 +1321,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
 ##
 ## MACRO: Write Plan-shows-ModelElement relations to SpecIF
 ##
-#macro( writePlanShowsMElRelations $plan )
+#macro( writeShowsRelations $plan )
 #set ( $MEls = $plan.getAllModelElements() )
 #foreach( $MEl in $MEls )
 #if( $allUIDs.contains( $MEl.getUniqueIdentifier() ) )
@@ -1328,7 +1346,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
 ##
 ## MACRO: Write ModelElement-to-ModelElement relations to SpecIF
 ##
-#macro( writeMElContainsRelations $uniqueElement )
+#macro( writeContainsRelations $uniqueElement )
 #set( $MEls = $uniqueElement.getDirectlyContainedModelElements() )
 #foreach( $MEl in $MEls )
 #if( $allUIDs.contains( $MEl.getUniqueIdentifier() ) )
@@ -1349,14 +1367,14 @@ $output.replaceAll('\"', '\\\"')#end##macro
 #end##foreach
 #end
 ##
-#macro( writeMElReadWritesRelations $uniqueElement )
+#macro( writeStoresRelations $uniqueElement )
 #set( $MEls = $uniqueElement.getModifiedInfos() )
 #foreach( $MEl in $MEls )
 #if( $allUIDs.contains( $MEl.getUniqueIdentifier() ) )
 #if( $itemCnt > 0)
 	}, {
 #end
-#set( $itemCnt = $itemCnt + 1 )
+#set( $itemCnt = $itemCnt + 2 )
         "id": "${idMElWritesMElType}-${uniqueElement.getUniqueIdentifier()}-$MEl.getUniqueIdentifier()",
         "title": "$cfgTypeMElWritesMEl",
 		"description": "'${uniqueElement.getName()}' $cfgLabelMElWritesMEl '${MEl.getName()}'",
@@ -1410,31 +1428,69 @@ $output.replaceAll('\"', '\\\"')#end##macro
 #end##foreach
 #end##macro
 ##	
-#macro( writeMElCommunicatesRelations $uniqueElement )
+#macro( writeCommunicatesRelations $uniqueElement )
 ## Functions communicating with $uniqueElement.getName():
 #set( $MEls = $uniqueElement.getCommunicatingFunctions() )
 #foreach( $MEl in $MEls )
 #if( $allUIDs.contains( $MEl.getUniqueIdentifier() ) )
-$MEl.getName()
+#if( $itemCnt > 0)
+	}, {
+#end
+#set( $itemCnt = $itemCnt + 1 )
+        "id": "${idMElSendsToMElType}-${MEl.getUniqueIdentifier()}-${uniqueElement.getUniqueIdentifier()}",
+        "title": "$cfgTypeMElSendsToMEl",
+		"description": "'${MEl.getName()}' $cfgLabelMElSendsToMEl '${uniqueElement.getName()}'",
+        "statementType": "ST-$cfgMElSendsToMElType",
+        "subject": "${idMEl}-$MEl.getUniqueIdentifier()",
+        "object": "${idMEl}-$uniqueElement.getUniqueIdentifier()",
+        "changedAt": "$actualTime"
+##    }, {
+##		"id": "${idMElReceivesFromMElType}-${MEl.getUniqueIdentifier()}-${uniqueElement.getUniqueIdentifier()}",
+##		"title": "$cfgTypeMElReceivesFromMEl",
+##		"description": "'${MEl.getName()}' $cfgLabelMElReceivesFromMEl '${uniqueElement.getName()}'",
+##		"statementType": "ST-$cfgMElReceivesFromMElType",
+##		"subject": "${idMEl}-$MEl.getUniqueIdentifier()",
+##		"object": "${idMEl}-$uniqueElement.getUniqueIdentifier()",
+##		"changedAt": "$actualTime"
 #end##if
 #end##foreach
-## Functions sending $uniqueElement.getName():
+## Functions sending to $uniqueElement.getName():
 #set( $MEls = $uniqueElement.getSendingFunctions() )
 #foreach( $MEl in $MEls )
 #if( $allUIDs.contains( $MEl.getUniqueIdentifier() ) )
-$MEl.getName()
-#end##if
-#end##foreach
-## Functions receiving $uniqueElement.getName():
-#set( $MEls = $uniqueElement.getReceivingFunctions() )
-#foreach( $MEl in $MEls )
-#if( $allUIDs.contains( $MEl.getUniqueIdentifier() ) )
-$MEl.getName()
-#end##if
-#end##foreach
+#if( $itemCnt > 0)
+	}, {
 #end
+#set( $itemCnt = $itemCnt + 1 )
+        "id": "${idMElSendsToMElType}-${MEl.getUniqueIdentifier()}-${uniqueElement.getUniqueIdentifier()}",
+        "title": "$cfgTypeMElSendsToMEl",
+		"description": "'${MEl.getName()}' $cfgLabelMElSendsToMEl '${uniqueElement.getName()}'",
+        "statementType": "ST-$cfgMElSendsToMElType",
+        "subject": "${idMEl}-$MEl.getUniqueIdentifier()",
+        "object": "${idMEl}-$uniqueElement.getUniqueIdentifier()",
+        "changedAt": "$actualTime"
+#end##if
+#end##foreach
+## Functions receiving from $uniqueElement.getName():
+##set( $MEls = $uniqueElement.getReceivingFunctions() )
+##foreach( $MEl in $MEls )
+##if( $allUIDs.contains( $MEl.getUniqueIdentifier() ) )
+##if( $itemCnt > 0)
+##	}, {
+##end
+##set( $itemCnt = $itemCnt + 1 )
+##		"id": "${idMElReceivesFromMElType}-${MEl.getUniqueIdentifier()}-${uniqueElement.getUniqueIdentifier()}",
+##		"title": "$cfgTypeMElReceivesFromMEl",
+##		"description": "'${MEl.getName()}' $cfgLabelMElReceivesFromMEl '${uniqueElement.getName()}'",
+##		"statementType": "ST-$cfgMElReceivesFromMElType",
+##		"subject": "${idMEl}-$MEl.getUniqueIdentifier()",
+##		"object": "${idMEl}-$uniqueElement.getUniqueIdentifier()",
+##		"changedAt": "$actualTime"
+##end##if
+##end##foreach
+#end##macro
 ##
-#macro( writeMElInfluencesRelations $uniqueElement )
+#macro( writeInfluencesRelations $uniqueElement )
 ## States influenced by $uniqueElement.getName():
 #set( $MEls = $uniqueElement.getInfluencedInfos() )
 #foreach( $MEl in $MEls )
@@ -1451,7 +1507,7 @@ $MEl.getName()
 #end##foreach
 #end
 ##
-#macro( writeMElPrecedesRelations $uniqueElement )
+#macro( writePrecedesRelations $uniqueElement )
 #set( $MEls = $uniqueElement.getCausallyDirectlyPrecedingModelElements() )
 #foreach( $MEl in $MEls )
 #if( $allUIDs.contains( $MEl.getUniqueIdentifier() ) )
@@ -2110,7 +2166,7 @@ $output#end##if
 ##
 ############################################################################
 #macro( writeLegend )
-#set( $output = '<p class=\"inline-label\">${cfgLegendChapterTitle}:</p>' )
+#set( $output = "<p class=\"inline-label\">${cfgLegendChapterTitle}:</p>" )
 #set( $output = $output + "<p>${cfgLabelLegendDescription}</p>" )
 ##	<table style="width=100%; margin=0 0 0 0;" border="1" cellspacing="0" cellpadding="4">
 ##	<table border="1" cellspacing="0" cellpadding="4">
@@ -2763,14 +2819,14 @@ $output#end##macro
         "subjectTypes": ["RT-$idAct", "RT-$idSta", "RT-$idEvt"],
         "objectTypes": ["RT-$idAct", "RT-$idSta", "RT-$idEvt"],
         "changedAt": "$templateTime"
-    }, {
-        "id": "ST-$cfgMElWritesAndReadsMElType",
-        "title": "$cfgTypeMElWritesAndReadsMEl",
-        "description": "$cfgLabelActor $cfgLabelMElWritesAndReadsMEl $cfgLabelState",
-        "instantiation": ["auto"],
-        "subjectTypes": ["RT-$idAct"],
-        "objectTypes": ["RT-$idSta"],
-        "changedAt": "$templateTime"
+##    }, {
+##        "id": "ST-$cfgMElWritesAndReadsMElType",
+##        "title": "$cfgTypeMElWritesAndReadsMEl",
+##        "description": "$cfgLabelActor $cfgLabelMElWritesAndReadsMEl $cfgLabelState",
+##        "instantiation": ["auto"],
+##        "subjectTypes": ["RT-$idAct"],
+##        "objectTypes": ["RT-$idSta"],
+##        "changedAt": "$templateTime"
     }, {
         "id": "ST-$cfgMElWritesMElType",
         "title": "$cfgTypeMElWritesMEl",
@@ -2787,6 +2843,22 @@ $output#end##macro
         "subjectTypes": ["RT-$idAct"],
         "objectTypes": ["RT-$idSta"],
         "changedAt": "$templateTime"
+    }, {
+        "id": "ST-$cfgMElSendsToMElType",
+        "title": "$cfgTypeMElSendsToMEl",
+        "description": "$cfgLabelActor $cfgLabelMElSendsToMEl $cfgLabelActor",
+        "instantiation": ["auto"],
+        "subjectTypes": ["RT-$idAct"],
+        "objectTypes": ["RT-$idAct"],
+        "changedAt": "$templateTime"
+##    }, {
+##        "id": "ST-$cfgMElReceivesFromMElType",
+##        "title": "$cfgTypeMElReceivesFromMEl",
+##        "description": "$cfgLabelActor $cfgLabelMElReceivesFromMEl $cfgLabelState",
+##        "instantiation": ["auto"],
+##        "subjectTypes": ["RT-$idAct"],
+##        "objectTypes": ["RT-$idAct"],
+##        "changedAt": "$templateTime"
     }, {
         "id": "ST-$cfgMElPrecedesMElType",
         "title": "$cfgTypeMElPrecedesMEl",
@@ -3034,14 +3106,14 @@ $output#end##macro
 #set( $itemCnt = 0 )
 	"statements": [{
 #foreach( $plan in $allPlansIncluded )
-	#writePlanShowsMElRelations( $plan )
+	#writeShowsRelations( $plan )
 #end
 #foreach( $UE in $allMEsIncluded )
-	#writeMElContainsRelations( $UE )
-	#writeMElReadWritesRelations( $UE )
-##	#writeMElCommunicatesRelations( $UE )
-##	#writeMElInfluencesRelations( $UE )
-	#writeMElPrecedesRelations( $UE )
+	#writeContainsRelations( $UE )
+	#writeStoresRelations( $UE )
+	#writeCommunicatesRelations( $UE )
+##	#writeInfluencesRelations( $UE )
+	#writePrecedesRelations( $UE )
 #end
 #foreach( $requirement in $allReqsIncluded )
 	#writeReq2MElRelations( $requirement )
