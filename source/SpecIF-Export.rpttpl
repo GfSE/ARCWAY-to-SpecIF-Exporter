@@ -857,7 +857,7 @@ $output#end##macro
 ## Replace single backslash by double ('escaped') backslash: 
 #set( $fileName = $fileName.replaceAll('\\', '\\\\') )
 #mimeType( $fileName, $fileType )
-#set( $output = '<p><object type=\"${fileType}\" data=\"${fileName}\">${name}</object></p>' )
+#set( $output = "<p><object type=\"${fileType}\" data=\"${fileName}\">${name}</object></p>" )
 $output#end##if
 #end##macro
 ##
@@ -865,7 +865,7 @@ $output#end##if
 #if( $cfgPlan_EmbeddedInObjectText && $fileName.length() > 4 )
 ## Replace single backslash by double ('escaped') backslash: 
 #set( $fileName = $fileName.replaceAll('\\', '\\\\') )
-#set( $output = '<p class=\"inline-label\">${cfgLabelPlan}:</p><p><object type=\"${planFileType}\" data=\"${fileName}\">${name}</object></p>' )
+#set( $output = "<p class=\"inline-label\">${cfgLabelPlan}:</p><p><object type=\"${planFileType}\" data=\"${fileName}\">${name}</object></p>" )
 $output#end##if
 #end##macro
 ##
@@ -886,7 +886,7 @@ $output#end##if
 #set( $fileName = $item.getFileProperty( $customPropertyID ).replaceAll('\\', '\\\\') )
 #if( $fileName.length() > 0 )
 #mimeType( $fileName, $fT )
-#set( $output = '<p class=\"inline-label\">$dataModelProvider.getDisplaynameOfProperty($item.getTypeID(), $customPropertyID )</p><p><object type=\"${fT}\" data=\"${fileName}\">${item.getName()}</object></p>' )
+#set( $output = "<p class=\"inline-label\">$dataModelProvider.getDisplaynameOfProperty($item.getTypeID(), $customPropertyID )</p><p><object type=\"${fT}\" data=\"${fileName}\">${item.getName()}</object></p>" )
 #end##if
 #end##if
 #end##foreach
