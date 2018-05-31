@@ -76,7 +76,7 @@
 ##
 #set( $copyright = "(C) 2010-2018 enso managers gmbh Berlin" )
 #set( $acVersion = "3.6" )
-#set( $version   = "1.75")   
+#set( $version   = "1.76")   
 #set( $specifVersion = "0.10.4" )
 #set( $timezone  = "+01:00" )
 #set( $templateTime = "2018-05-10T11:54:00" + $timezone )
@@ -459,13 +459,14 @@
 #set( $title = ${project.getDisplayName()}+" ("+ ${today} +")" )
 ## Vorläufig ist der File ID jener des Projektes und statisch.
 #set( $fileID = ${prefixProject} + ${projectID} )
+#set( $allFiles = "" ) ## will be built when a file is exported
 ##
 ## Später wird es gemäß ProSTEP Konvention ein ID der aktuellen Austausch-Datei:
 ## #set( $fileID = ${prefixProject} + ${projectID} + "-" + $now )
-## #set( $specID = ${prefixProject} + ${projectID} )  ## ReqIF Implementor-Forum: SPECIFICATION-ID is project-ID
+## #set( $specID = ${prefixProject} + ${projectID} )## ReqIF Implementor-Forum: SPECIFICATION-ID is project-ID
 ##
-#set( $specID = "H-"+${projectID} )  ## currently the ReqIF Server uses ReqIF file-ID to recognize a project
-##set( $convID = ${prefixConversation}+${projectID} )  ## currently the ReqIF Server uses ReqIF file-ID to recognize a project
+#set( $specID = "H-"+${projectID} )## currently the ReqIF Server uses ReqIF file-ID to recognize a project
+##set( $convID = ${prefixConversation}+${projectID} )## currently the ReqIF Server uses ReqIF file-ID to recognize a project
 ##
 #set( $shortStringMaxLength = "96" )
 #set( $stringMaxLength = "512" )## für Insta.  Meist sollte 255 reichen.
@@ -721,7 +722,6 @@
 ## 
 #macro( createPlanPresentationRule )
 #if( $planFileType == $planFileTypeSvg )
-##<book><chapter>
 ## mit leerer Map starten:
 #set($elementPresentationRules = $arrayHelper.createHashMap()) 
 ## je Modellelement eine ElementPresentationRule festlegen:
@@ -729,8 +729,8 @@
 #set($allModelElements = $project.getAllModelElements()) 
 #foreach($modelElement in $allModelElements)
 	#set($elementUID = $modelElement.getUniqueIdentifier())
-	#set($elementType = $modelElement.getElementTypeID()) ## ClassID for Model Element
-##	<para> elementUID: $elementUID, elementType: $elementType </para>
+	#set($elementType = $modelElement.getElementTypeID())## ClassID for Model Element
+##	elementUID: $elementUID, elementType: $elementType
 	#set($elementPresentationRule = $projectDataProvider.createElementPresentationRule()) 
 ##	#set($dummy = $elementPresentationRule.setRole($elementType))
 	#set($dummy = $elementPresentationRule.setRole("com.arcway.cockpit.uniqueelement ${elementUID}"))## ClassID for Model Element
@@ -742,10 +742,9 @@
 #foreach($plan in $projectDataProvider.getProject().getAllPlans())
 	#set($planType = $plan.getPlanType())## Class ID for Plan
 	#set($dummy = $planPresentationRule.setRole($planType))
-##	<para>Plan Type: $planType</para>
+##	Plan Type: $planType
 ##		$plan.getImageWithPresentationRule($planPresentationRule)
 #end
-##</book></chapter>
 ## ggf. weitere Attribute der PlanPresentationRule nach Bedarf setzen
 #end##if
 #end##macro
@@ -852,7 +851,7 @@ $output#end##macro
 ##
 ############################################################################
 ##
-#macro( embedImgInObjectText $name $fileName )
+#macro( embedImgRef $name $fileName )
 #if( $fileName.length() > 4 )
 ## Replace single backslash by double ('escaped') backslash: 
 #set( $fileName = $fileName.replaceAll('\\', '\\\\') )
@@ -861,17 +860,15 @@ $output#end##macro
 $output#end##if
 #end##macro
 ##
-#macro( embedPlanInObjectText $name $fileName )
-#if( $cfgPlan_EmbeddedInObjectText && $fileName.length() > 4 )
+#macro( embedPlanRef $name $fileName )
+#if( $fileName.length() > 4 )
 ## Replace single backslash by double ('escaped') backslash: 
 #set( $fileName = $fileName.replaceAll('\\', '\\\\') )
 #set( $output = "<p class=\"inline-label\">${cfgLabelPlan}:</p><p><object type=\"${planFileType}\" data=\"${fileName}\">${name}</object></p>" )
 $output#end##if
 #end##macro
 ##
-############################################################################
-##
-#macro( embedFilesInObjectText $item )
+#macro( embedFileRefs $item )
 #if( $cfgFile_EmbeddedInObjectText )
 #set( $output = "" )
 #if ($item.hasDefaultCategory())
@@ -1129,14 +1126,14 @@ $output.replaceAll('\"', '\\\"')#end##macro
         }, {
             "title": "$cfgTypeDescription",
             "class": "PT-${prefix}-Text",
-            "value": "<div>#writeDescription( $plan )#embedPlanInObjectText( $plan.getName(), $fileName )</div>"
-#if( !$cfgPlan_EmbeddedInObjectText && $fileName.length() > 4 )
-## Write a property to show the plan diagram:
-#set( $fileName = $fileName.replaceAll('\\', '\\\\') )
+#if( $cfgPlan_EmbeddedInObjectText )
+            "value": "<div>#writeDescription( $plan )#embedPlanRef( $plan.getName(), $fileName )</div>"
+#else
+            "value": "<div>#writeDescription( $plan )</div>"
         }, {
             "title": "$cfgTypePlan",
             "class": "PT-${prefix}-Diagram",
-            "value": "<div><object type=\"${planFileType}\" data=\"${fileName}\">${plan.getName()}</object></div>"
+            "value": "<div>#embedPlanRef( $plan.getName(), $fileName )</div>"
 #end##if
         }, {
             "title": "$cfgTypeNotation",
@@ -1189,7 +1186,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
         }, {
             "title": "$cfgTypeDescription",
             "class": "PT-${prefix}-Text",
-            "value": "<div>#writeDescription( $req )#embedFilesInObjectText( $req )</div>"
+            "value": "<div>#writeDescription( $req )#embedFileRefs( $req )</div>"
         }, {
             "title": "$cfgTypeStatus",
             "class": "PT-${prefix}-Status",
@@ -1237,7 +1234,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
         }, {
             "title": "$cfgTypeDescription",
             "class": "PT-${pfx}-Text",
-            "value": "<div>#writeDescription( $MEl )#embedFilesInObjectText( $MEl )</div>"
+            "value": "<div>#writeDescription( $MEl )#embedFileRefs( $MEl )</div>"
 ##
 ## Create a PROPERTY-VALUE per ARCWAY Custom Property:
 #writeCustomProperties( $pfx $pfx $MEl )
@@ -1718,7 +1715,7 @@ $MEl.getName()
         }, {
             "title": "$cfgTypeDescription",
             "class": "PT-${idFld}-Text",
-            "value": "<div>#writeDescription( $folder )#embedFilesInObjectText( $folder )</div>"
+            "value": "<div>#writeDescription( $folder )#embedFileRefs( $folder )</div>"
         }],
 #isoTimeOfDateOfLastModification( $folder, $date )
         "changedAt": "$date"
@@ -2976,7 +2973,7 @@ $output#end##macro
         }, {
             "title": "$cfgTypeDescription",
             "class": "PT-${idInf}-Text",
-            "value": "<div>#embedImgInObjectText( $cfgProjectInformationChapterTitle, $fileName )#writeDescription( $project )#writeStakeholders( $stakeholders )#writeLegend()</div>"
+            "value": "<div>#embedImgRef( $cfgProjectInformationChapterTitle, $fileName )#writeDescription( $project )#writeStakeholders( $stakeholders )#writeLegend()</div>"
         }],
 		"changedAt": "$actualTime"
 ##
@@ -3155,5 +3152,7 @@ $output#end##macro
 		}],
 		"changedAt": "$actualTime"
     }],
-    "files": []
+#################################
+## FILES:
+    "files": [${allFiles}]
 }
