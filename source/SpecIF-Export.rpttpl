@@ -951,12 +951,11 @@ $output#end##if
 ##
 #foreach( $customPropertyID in $customprops )
 #if( !$customPropertyID.startsWith( $suppressPrefix ))
-#set ( $displayName = $dataModelProvider.getDisplaynameOfProperty( $objectTypeID, $customPropertyID ) )
 #set ( $typeID = $dataModelProvider.getDatatypeIDOfProperty( $objectTypeID, $customPropertyID ) )
 	#if( !$typeID.equals("file") || !$cfgFile_EmbeddedInObjectText )
 		}, {
 			"id": "PT-${prefixId}-${customPropertyID}",
-			"title": "$displayName",
+			"title": "$dataModelProvider.getDisplaynameOfProperty( $objectTypeID, $customPropertyID )",
 	#end
     #if( $typeID.equals("boolean") )
             "dataType": "DT-Boolean",
@@ -1043,7 +1042,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
 ## iterate through all custom properties:
 #foreach( $customPropertyID in $customProperties )
 #if( !$customPropertyID.startsWith( $suppressPrefix ))
-#set ( $displayNameOfProperty = $dataModelProvider.getDisplaynameOfProperty($item.getTypeID(), $customPropertyID ) )
+##set ( $displayName = $dataModelProvider.getDisplaynameOfProperty($item.getTypeID(), $customPropertyID ) )
 #set ( $typeID = $dataModelProvider.getDatatypeIDOfProperty( $item.getTypeID(), $customPropertyID ) )
 #isoTimeOfDateOfLastModification( $item, $date )
 	#if( $item.hasPropertyValue( $customPropertyID ) )
@@ -1053,7 +1052,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
 	#end
 	#if ( $typeID.equals("boolean") )
 #set( $temp = $item.getPropertyAsString( $customPropertyID ) )
-		#if( $temp == "wahr" ) #set( $temp = "true" ) #elseif( $temp == "falsch" ) #set( $temp = "false" ) #end
+#if( $temp == "wahr" ) #set( $temp = "true" ) #elseif( $temp == "falsch" ) #set( $temp = "false" ) #end
             "value": "$temp"
 	#elseif ( $typeID.equals("integer") )
             "value": "$item.getPropertyAsString( $customPropertyID )"
