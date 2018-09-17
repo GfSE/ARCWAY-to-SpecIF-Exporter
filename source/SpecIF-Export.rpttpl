@@ -3125,7 +3125,6 @@ $output#end##macro
 	"hierarchies": [{
         "id": "$specID",
         "title": "${title}",
-        "description": "This is the root node of a project hierarchy (tree)",
         "class": "HT-ACProject",
 		"properties": [{
             "title": "$cfgTypeTitle",
