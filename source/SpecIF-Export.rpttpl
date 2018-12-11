@@ -838,7 +838,7 @@ $output#end##macro
 ##
 #macro( isoTime $time_MilliSecondsSince_01_01_1970 $isoTimestring )
 #set ( $timeWithoutSeconds = $dateTimeProvider.printTimestampInISO8601Format( $time_MilliSecondsSince_01_01_1970, true ) )
-#if ( $timeWithoutSeconds.length() > 1 ) 
+#if( $timeWithoutSeconds.length() > 1 ) 
 #set( $isoTimestring = $timeWithoutSeconds.substring( 0, 16 ).concat( ':00' ).concat( $timeWithoutSeconds.substring( 16 ) ) )
 #else
 #set( $isoTimestring = '2004-01-01T00:00:00+01:00' )
@@ -871,14 +871,14 @@ $output#end##if
 #macro( embedFileRefs $item )
 #if( $cfgFile_EmbeddedInObjectText )
 #set( $output = "" )
-#if ($item.hasDefaultCategory())
+#if($item.hasDefaultCategory())
 #set( $customProperties = $dataModelProvider.getCustomPropertyIdsForObjectType( $item.getTypeID() ) )
 #else
 #set( $customProperties = $dataModelProvider.getCustomPropertiesForObjectTypeCategory($item.getTypeID(), $item.getCategoryID()) )
 #end
 ## iterate through all properties and append all files via XHTML file reference
 #foreach( $customPropertyID in $customProperties )
-#if ( $dataModelProvider.getDatatypeIDOfProperty($item.getTypeID(), $customPropertyID ).equals("file") && $item.hasPropertyValue( $customPropertyID ) )
+#if( $dataModelProvider.getDatatypeIDOfProperty($item.getTypeID(), $customPropertyID ).equals("file") && $item.hasPropertyValue( $customPropertyID ) )
 ## Export of the file and append reference to the description:
 #set( $fileName = $item.getFileProperty( $customPropertyID ).replaceAll('\\', '\\\\') )
 #if( $fileName.length() > 0 )
@@ -943,7 +943,7 @@ $output#end##if
 ## categoryID	category ID or empty string for default category
 ############################################################################
 #macro( writeCustomPropertyTypes $prefixId $prefixDt $objectTypeID $categoryID )
-#if ( $categoryID.equals("") )
+#if( $categoryID.equals("") )
 	#set( $customprops = $dataModelProvider.getCustomPropertyIdsForObjectType( $objectTypeID ) )
 #else
 	#set( $customprops = $dataModelProvider.getCustomPropertiesForObjectTypeCategory( $objectTypeID, $categoryID ) )
@@ -1033,7 +1033,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
 ## MACRO: Write a PROPERTY-VALUE per ARCWAY Custom Property
 ## 
 #macro( writeCustomProperties $prefixId $prefixDt $item )
-#if ($item.hasDefaultCategory())
+#if($item.hasDefaultCategory())
 	#set($customProperties = $dataModelProvider.getCustomPropertyIdsForObjectType( $item.getTypeID() ) )
 #else
 	#set($customProperties = $dataModelProvider.getCustomPropertiesForObjectTypeCategory( $item.getTypeID(), $item.getCategoryID() ) )
@@ -1050,7 +1050,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
         }, {
             "class": "PT-${prefixId}-${customPropertyID}",
 	#end
-	#if ( $typeID.equals("boolean") )
+	#if( $typeID.equals("boolean") )
 #set( $temp = $item.getPropertyAsString( $customPropertyID ) )
 #if( $temp == "wahr" ) #set( $temp = "true" ) #elseif( $temp == "falsch" ) #set( $temp = "false" ) #end
             "value": "$temp"
@@ -1100,7 +1100,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
 #macro( writePlan $plan )
 #set( $dummy = $allPlansIncluded.add( $plan ) )
 #set( $dummy = $allUIDs.add( $plan.getUniqueIdentifier()) )
-##if ($plan.hasDefaultCategory())
+##if($plan.hasDefaultCategory())
 	#set($prefix = "${idPln}")
 ##else
 ##	#set($prefix = "${idPln}-$plan.getCategoryID()")
@@ -1154,7 +1154,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
 #if( $arrayHelper.getArraySize( $allReqCategories )==1 )
 	#set( $pfx = "$idReq" )
 #else
-#if ($req.hasDefaultCategory())
+#if($req.hasDefaultCategory())
 	#set($pfx = "${idReq}-default" )
 #elseif( $req.getCategoryID().equals($cfgReqCategoryRequirement) )
 	#set($pfx = "$idReq")
@@ -1252,7 +1252,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
 ##
 #macro( writeIssue $issue )
 ## #set( $dummy = $allUIDs.add($issue.getUniqueIdentifier()) )... list is filled by MACRO collectIssues
-##if ($issue.hasDefaultCategory())
+##if($issue.hasDefaultCategory())
 	#set($prefix = "$idIss")
 ##else
 ##	#set($prefix = "$idIss" + "-$issue.getCategoryID()")
@@ -1278,7 +1278,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
         }, {
             "title": "$cfgTypeStatus",
             "class": "PT-${prefix}-Status",
-#if ( $issue.getStatus().length() > 0 ) 
+#if( $issue.getStatus().length() > 0 ) 
             "value": "V-${idIss}-Status-#makeId( $issue.getStatus() $allIssueStatusValues )"
 #else 
             "value": ""
@@ -1286,7 +1286,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
         }, {
             "title": "$cfgTypePriority",
             "class": "PT-${prefix}-Priority",
-#if ( $issue.getPriority().length() > 0 )
+#if( $issue.getPriority().length() > 0 )
             "value": "V-${idIss}-Prio-#makeId( $issue.getPriority() $allIssuePrioValues )"
 #else 
             "value": ""
@@ -1296,7 +1296,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
             "class": "PT-${prefix}-Responsible",
             "value": "$issue.getResponsible()"
 #set( $duedate = $issue.getDueDate_MilliSecondsSince_01_01_1970() )
-#if ( $duedate > 0 ) 
+#if( $duedate && $duedate > 0 ) 
 #isoTime( $duedate, $isoDueDate )
         }, {
             "title": "$cfgTypeDueDate",
@@ -2502,7 +2502,7 @@ $output#end##macro
 ## adding default category
 #set( $dummy = $allCategories.add(0, ""))
 #foreach($categoryID in $allCategories)
-#if ( $categoryID.equals("") )
+#if( $categoryID.equals("") )
 	#set ( $prefix = "${idPln}" )
 #else
 	#set ( $prefix = "${idPln}-${categoryID}" )
@@ -2741,7 +2741,7 @@ $output#end##macro
 ## #set( $dummy = $allCategories.add(0, ""))
 ##foreach($categoryID in $allCategories)
 	}, {
-## #if ( $categoryID.equals("") )
+## #if( $categoryID.equals("") )
 	#set ( $prefix = "${idIss}")
 ## #else
 ##	#set ( $prefix = "${idIss}-${categoryID}")
@@ -2871,7 +2871,7 @@ $output#end##macro
 #set( $valCnt = 0 )
 #foreach($categoryID in $allReqCategories)
 #if( $valCnt > 0 ), #end
-#if ( $categoryID.equals("") )"RT-${idReq}-default"#elseif( $categoryID.equals($cfgReqCategoryRequirement) )"RT-${idReq}"#elseif( $categoryID.equals($cfgReqCategoryFeature) )"RT-${idFea}"#elseif( $categoryID.equals($cfgReqCategoryAnnotation) )"RT-${idAnn}"#else"RT-${idReq}-${categoryID}"#end
+#if( $categoryID.equals("") )"RT-${idReq}-default"#elseif( $categoryID.equals($cfgReqCategoryRequirement) )"RT-${idReq}"#elseif( $categoryID.equals($cfgReqCategoryFeature) )"RT-${idFea}"#elseif( $categoryID.equals($cfgReqCategoryAnnotation) )"RT-${idAnn}"#else"RT-${idReq}-${categoryID}"#end
 #set( $valCnt = $valCnt + 1 )
 #end##foreach
 #end
@@ -2881,7 +2881,7 @@ $output#end##macro
 #foreach($categoryID in $allReqCategories)
 #if( $categoryID != $cfgReqCategoryAnnotation )
 #if( $valCnt > 0 ), #end
-#if ( $categoryID.equals("") )"RT-${idReq}-default"#elseif( $categoryID.equals($cfgReqCategoryRequirement) )"RT-${idReq}"#elseif( $categoryID.equals($cfgReqCategoryFeature) )"RT-${idFea}"#else"RT-${idReq}-${categoryID}"#end
+#if( $categoryID.equals("") )"RT-${idReq}-default"#elseif( $categoryID.equals($cfgReqCategoryRequirement) )"RT-${idReq}"#elseif( $categoryID.equals($cfgReqCategoryFeature) )"RT-${idFea}"#else"RT-${idReq}-${categoryID}"#end
 #set( $valCnt = $valCnt + 1 )
 #end
 #end##foreach
