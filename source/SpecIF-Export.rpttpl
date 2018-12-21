@@ -251,6 +251,7 @@
 #set( $cfgAnnotationDescription = "An Interaction-Room 'Annotation' indicates a point of special interest. Examples are customer or user value, product features with prominent benefit,effort or challenges during development." )
 #set( $cfgSpecDescription = "Root node of a specification (outline)." )
 #set( $cfgIssueDescription = "An 'Issue' is a question to answer or decision to take which is worth tracking." )
+#set( $cfgBomFolderDescription = "This "+${cfgStrippedFolderNameBom}+" has been automatically generated from the model.")
 ##set( $cfgLabelAppendedRelations = "Statements" )
 ##
 #set( $cfgLabelUniqueElement = "Model-Element" )
@@ -369,6 +370,7 @@
 #set( $cfgAnnotationDescription = "Eine Interaction-Room 'Annotation' weist auf einen Punkt besonderen Interesses hin. Hierzu gehören Werte, die Kundenbedürfnisse widerspiegeln oder positiven Effekt auf die Ziele der Organisation haben, Produkteigenschaften, deren Umsetzung Nutzen/Aufwand verursacht, und Herausforderungen, die während der Entwicklung zu berücksichtigen sind." )
 #set( $cfgSpecDescription = "Wurzel einer Spezifikation (Gliederung)." )
 #set( $cfgIssueDescription = "Ein offener Punkt ist eine zu beantwortende Frage oder eine zu treffende Entscheidung." )
+#set( $cfgBomFolderDescription = "Aus dem Modell automatisch ermittelte "+${cfgStrippedFolderNameBom}+".")
 ##set( $cfgLabelAppendedRelations = "Aussagen" )
 ##
 #set( $cfgLabelUniqueElement = "Modellelement" )
@@ -1236,7 +1238,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
             "value": "<div>#writeDescription( $MEl )#embedFileRefs( $MEl )</div>"
 ##
 ## Create a PROPERTY-VALUE per ARCWAY Custom Property:
-#writeCustomProperties( $pfx $pfx $MEl )
+#writeCustomProperties( $pfx $idMEl $MEl )
 ##
 ## Up until rev=58 there was a transformation adding all related requirements as an additional property value
 ##
@@ -1685,7 +1687,7 @@ $MEl.getName()
 	!$cfgFolderNameGlossary.equals( $folderName ) &&
 	!$cfgFolderNameStakeholders.equals( $folderName ) )
 #if( $cfgFolderNameBom.equals( $folderName ) )
-	#writeBomTitle()
+	#writeBomFolder()
 #else
 #if( $cfgFolderNameIssues.equals( $folderName ) )
 	#writeAllIssueSetTitles()
@@ -1733,7 +1735,7 @@ $MEl.getName()
 ##
 ## MACRO: Write the title and description of the BOM Folder
 ##
-#macro( writeBomTitle )
+#macro( writeBomFolder )
 	}, {
 		"id": "${idFld}-${projectID}-BoM",
 		"title": "$cfgStrippedFolderNameBom",
@@ -1745,11 +1747,7 @@ $MEl.getName()
         }, {
             "title": "dcterms:description",
             "class": "PT-${idFld}-Text",
-#if( $cfgLanguage == "de" )
-			"value": "<div><p>Aus dem Modell automatisch ermittelte ${cfgStrippedFolderNameBom}.</p></div>"
-#else
-			"value": "<div><p>This ${cfgStrippedFolderNameBom} has been automatically generated from the model.</p></div>"
-#end				
+			"value": "<p>${cfgBomFolderDescription}</p>"
 		}],
         "changedAt": "$actualTime"
 #end##macro
@@ -2002,7 +2000,7 @@ $MEl.getName()
 ##
 ## MACRO: Write Bill of Material (BoM)
 ##
-#macro( writeCMEls $MEList )
+#macro( writeCMEls $MEList $parent )
 		"nodes": [{
 #set( $itemCnt = 0 )
 #foreach( $MEl in $MEList )
@@ -2011,8 +2009,9 @@ $MEl.getName()
 	#openMElRef( $MEl, true )
 ##$MEl.getName()
 #set( $cMEls = $MEl.getDirectlyContainedModelElements() )
-#if( $arrayHelper.getArraySize( $cMEls ) > 0 )
-	#writeCMEls( $cMEls )
+## avoid self-reference (whereas circular dependencies with >2 nodes remain undetected and result in a fatal script error):
+#if( $arrayHelper.getArraySize( $cMEls ) > 0 && $MEl.getUniqueIdentifier() != $parent.getUniqueIdentifier() )
+	#writeCMEls( $cMEls $MEl )
 #end
 	#closeMElRef()
 #end
@@ -2033,9 +2032,8 @@ $MEl.getName()
 #if( $MEl.getDirectContainerModelElements().isEmpty() )
 	#openMElRef( $MEl, true )
 #set( $cMEls = $MEl.getDirectlyContainedModelElements() )
-##if( !$cMEls.isEmpty() )
 #if( $arrayHelper.getArraySize( $cMEls ) > 0 )
-	#writeCMEls( $cMEls )
+	#writeCMEls( $cMEls $MEl )
 #end
 	#closeMElRef()
 #end##if
