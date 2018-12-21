@@ -251,7 +251,7 @@
 #set( $cfgAnnotationDescription = "An Interaction-Room 'Annotation' indicates a point of special interest. Examples are customer or user value, product features with prominent benefit,effort or challenges during development." )
 #set( $cfgSpecDescription = "Root node of a specification (outline)." )
 #set( $cfgIssueDescription = "An 'Issue' is a question to answer or decision to take which is worth tracking." )
-#set( $cfgBomFolderDescription = "This "+${cfgStrippedFolderNameBom}+" has been automatically generated from the model.")
+#set( $cfgBomFolderDescription = "This "+${cfgStrippedFolderNameBom}+" has been automatically generated using the 'contains' statements.")
 ##set( $cfgLabelAppendedRelations = "Statements" )
 ##
 #set( $cfgLabelUniqueElement = "Model-Element" )
@@ -370,7 +370,7 @@
 #set( $cfgAnnotationDescription = "Eine Interaction-Room 'Annotation' weist auf einen Punkt besonderen Interesses hin. Hierzu gehören Werte, die Kundenbedürfnisse widerspiegeln oder positiven Effekt auf die Ziele der Organisation haben, Produkteigenschaften, deren Umsetzung Nutzen/Aufwand verursacht, und Herausforderungen, die während der Entwicklung zu berücksichtigen sind." )
 #set( $cfgSpecDescription = "Wurzel einer Spezifikation (Gliederung)." )
 #set( $cfgIssueDescription = "Ein offener Punkt ist eine zu beantwortende Frage oder eine zu treffende Entscheidung." )
-#set( $cfgBomFolderDescription = "Aus dem Modell automatisch ermittelte "+${cfgStrippedFolderNameBom}+".")
+#set( $cfgBomFolderDescription = "Anhand der 'enthält'- Beziehungen automatisch ermittelte "+${cfgStrippedFolderNameBom}+".")
 ##set( $cfgLabelAppendedRelations = "Aussagen" )
 ##
 #set( $cfgLabelUniqueElement = "Modellelement" )
