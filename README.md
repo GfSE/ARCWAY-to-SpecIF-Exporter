@@ -6,8 +6,8 @@ The exporter is a script for the Apache Velocity template engine built into ARCW
 
 ## Examples
 These SpecIF files have been generated from an ARCWAY Cockpit model:
-- [Integrated Process- and IT-Documentation](https://specif.de/examples/IT-Documentation.specifz), [per SpecIF-Viewer](https://specif.de/apps/view.html#import=%22../examples/IT-Documentation.specifz%22).
-- [Integrated Specification of a Dimmer](https://specif.de/examples/Dimmer.specifz), [per SpecIF-Viewer](https://specif.de/apps/view.html#import=%22../examples/Dimmer.specifz%22).
+- [Integrated Process- and IT-Documentation](https://specif.de/examples/IT-Documentation.specifz), per [SpecIF-Viewer](https://specif.de/apps/view.html#import=%22../examples/IT-Documentation.specifz%22).
+- [Integrated Specification of a Dimmer](https://specif.de/examples/Dimmer.specifz), per [SpecIF-Viewer](https://specif.de/apps/view.html#import=%22../examples/Dimmer.specifz%22).
 
 ## Acknowledgements
 This work has been sponsored by [enso-managers gmbh](http://enso-managers.de), Berlin
