@@ -4,5 +4,10 @@ Exports a model created in [ARCWAY Cockpit](http://www.arcway.com/) to SpecIF. A
 ## Installation
 The exporter is a script for the Apache Velocity template engine built into ARCWAY Cockpit. Install it using the properties dialog of 'Reports' ('Berichtsvorlagen'), which is accessible via context menue, within an ARCWAY Cockpit project.
 
+## Examples
+These SpecIF files have been generated from an ARCWAY Cockpit model:
+- [Integrated Process- and IT-Documentation](https://specif.de/examples/IT-Documentation.specifz), [per SpecIF-Viewer](https://specif.de/apps/view.html#import=%22../examples/IT-Documentation.specifz%22).
+- [Integrated Specification of a Dimmer](https://specif.de/examples/Dimmer.specifz), [per SpecIF-Viewer](https://specif.de/apps/view.html#import=%22../examples/Dimmer.specifz%22).
+
 ## Acknowledgements
 This work has been sponsored by [enso-managers gmbh](http://enso-managers.de), Berlin
