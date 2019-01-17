@@ -106,6 +106,7 @@
 ##set( $idMElCommunicatesWithMElType = "SCom" )
 #set( $idMElSendsToMElType = "SSnd" )
 #set( $idMElReceivesFromMElType = "SRcv" )
+#set( $idMElInfluencesMElType = "SRep" )
 #set( $idMElLinkedRequirementType = "SSat" )
 #set( $idMElLinkedAnnotationType = "SAnn" )
 #set( $idRequirementReferenceType = "SDep" )
@@ -177,7 +178,8 @@
 #set( $cfgTypeMElReadsMEl = "SpecIF:reads" )  
 ##set( $cfgTypeMElCommunicatesWithMEl = "SpecIF:communicatesWith" )
 #set( $cfgTypeMElSendsToMEl = "SpecIF:sendsTo" )
-#set( $cfgTypeMElReceivesFromMEl = "SpecIF:receivesFrom" )
+##set( $cfgTypeMElReceivesFromMEl = "SpecIF:receivesFrom" )
+#set( $cfgTypeMElInfluencesMEl = "SpecIF:influences" )
 #set( $cfgTypePlanShowsMEl = "SpecIF:shows" )
 #set( $cfgTypeRequirementReferring = "SpecIF:dependsOn" )
 #set( $cfgTypeRequirementLink = "SpecIF:refersTo" )
@@ -280,8 +282,10 @@
 ##set( $cfgLabelMElCommunicatesWithMEl = "communicates with" )
 #set( $cfgMElSendsToMElType = "Sending" )
 #set( $cfgLabelMElSendsToMEl = "sends to" )
-#set( $cfgMElReceivesFromMElType = "Receiving" )
-#set( $cfgLabelMElReceivesFromMEl = "receives from" )
+#set( $cfgMElInfluencesMElType = "Influence" )
+#set( $cfgLabelMElInfluencesMEl = "influences" )
+##set( $cfgMElReceivesFromMElType = "Receiving" )
+##set( $cfgLabelMElReceivesFromMEl = "receives from" )
 ##
 #set( $cfgLabelFolder = "Folder" )
 ##set( $cfgRequirementsChapterTitle = "Requirements" )
@@ -397,8 +401,10 @@
 ##set( $cfgLabelMElCommunicatesWithMEl = "kommuniziert mit" )
 ##set( $cfgMElSendsToMElType = "Sending" )
 #set( $cfgLabelMElSendsToMEl = "sendet an" )
+##set( $cfgMElInfluencesMElType = "Influence" )
+#set( $cfgLabelMElInfluencesMEl = "beeinflusst" )
 ##set( $cfgMElReceivesFromMElType = "Receiving" )
-#set( $cfgLabelMElReceivesFromMEl = "empfängt von" )
+##set( $cfgLabelMElReceivesFromMEl = "empfängt von" )
 ##
 #set( $cfgLabelFolder = "Ordner" )
 ##set( $cfgRequirementsChapterTitle = "Anforderungen" )
@@ -1087,7 +1093,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
 #set( $fileName = $item.getFileProperty( $customPropertyID ).replaceAll('\\', '\\\\') )
 ##set( $fileName = $fileName.replaceAll('\\', '\\\\') )
 #mimeType( $fileName, $fileType )
-            "value": "<div><object type=\"${fileType}\" data=\"${fileName}\">${item.getName()}</object></div>"
+            "value": "<p><object type=\"${fileType}\" data=\"${fileName}\">${item.getName()}</object></p>"
 		#end
     #end##if
     #end##if
@@ -1493,14 +1499,17 @@ $output.replaceAll('\"', '\\\"')#end##macro
 #set( $MEls = $uniqueElement.getInfluencedInfos() )
 #foreach( $MEl in $MEls )
 #if( $allUIDs.contains( $MEl.getUniqueIdentifier() ) )
-$MEl.getName()
-#end##if
-#end##foreach
-## States influencing $uniqueElement.getName():
-#set( $MEls = $uniqueElement.getInfluencingInfos() )
-#foreach( $MEl in $MEls )
-#if( $allUIDs.contains( $MEl.getUniqueIdentifier() ) )
-$MEl.getName()
+#if( $itemCnt > 0)
+	}, {
+#end
+#set( $itemCnt = $itemCnt + 1 )
+        "id": "${idMElInfluencesMElType}-${MEl.getUniqueIdentifier()}-${uniqueElement.getUniqueIdentifier()}",
+        "title": "$cfgTypeMElInfluencesMEl",
+		"description": "'${MEl.getName()}' $cfgLabelMElInfluencesMEl '${uniqueElement.getName()}'",
+        "class": "ST-$cfgMElInfluencesMElType",
+        "subject": "${idMEl}-${uniqueElement.getUniqueIdentifier()}",
+        "object": "${idMEl}-${MEl.getUniqueIdentifier()}",
+        "changedAt": "$actualTime"
 #end##if
 #end##foreach
 #end
@@ -2854,6 +2863,14 @@ $output#end##macro
 ##        "objectClasses": ["RT-$idAct"],
 ##        "changedAt": "$templateTime"
     }, {
+        "id": "ST-$cfgMElInfluencesMElType",
+        "title": "$cfgTypeMElInfluencesMEl",
+        "description": "$cfgLabelState $cfgLabelMElInfluencesMEl $cfgLabelState",
+        "instantiation": ["auto"],
+        "subjectClasses": ["RT-$idSta"],
+        "objectClasses": ["RT-$idSta"],
+        "changedAt": "$templateTime"
+    }, {
         "id": "ST-$cfgMElPrecedesMElType",
         "title": "$cfgTypeMElPrecedesMEl",
         "description": "$cfgLabelUniqueElement $cfgLabelMElPrecedesMEl $cfgLabelUniqueElement",
@@ -2924,7 +2941,7 @@ $output#end##macro
 #if( $projectHasIssues )
     }, {
         "id": "ST-$cfgIssueLinkType",
-        "title": "$cfgTypeRequirementLink",
+        "title": "$cfgTypeIssueLink",
         "description": "$cfgLabelIssueType $cfgLabelIssueLink $cfgLabelPlan/$cfgLabelUniqueElement/$cfgLabelRequirement",
         "instantiation": ["user", "auto"],
         "subjectClasses": ["RT-$idIss"],
@@ -3106,7 +3123,7 @@ $output#end##macro
 	#writeContainsRelations( $UE )
 	#writeStoresRelations( $UE )
 	#writeCommunicatesRelations( $UE )
-##	#writeInfluencesRelations( $UE )
+	#writeInfluencesRelations( $UE )
 	#writePrecedesRelations( $UE )
 #end
 #foreach( $requirement in $allReqsIncluded )
