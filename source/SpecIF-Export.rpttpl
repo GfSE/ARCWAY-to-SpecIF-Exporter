@@ -1857,7 +1857,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
 #end##macro
 ##
 #macro( writeProjectChapter )
-#set( $objectRef = ${idInf}+"-"+${projectID} )
+#set( $objectRef = ${idFld}+"-"+${projectID} )
 #if( $itemCnt > 0)
 			}, {
 #end
@@ -2451,7 +2451,7 @@ $output#end##macro
     }],
 ##
 #################################
-## RESOURCE-TYPES
+## RESOURCE-CLASSES
     "resourceClasses": [{
 ##
 ## resourceClass 'Folder' used for both folders and requirement-sets.
@@ -2479,32 +2479,7 @@ $output#end##macro
         }],
         "changedAt": "$templateTime"
 ##
-## resourceClass 'Information'.
-## Folder categories are not supported; for a solution see ReqIF-export-61.rpttpl.
-	}, {
-        "id": "RT-${idInf}",
-        "title": "$cfgTypeInformation",
-        "description": "$cfgInformationDescription",
-        "instantiation": ["auto","user"],
-#if( $iconFld.length()>0 )
-		"icon": "${iconFld}",
-#end
-        "propertyClasses": [{
-            "id": "PT-${idInf}-Name",
-            "title": "$cfgTypeTitle",
-            "dataType": "DT-ShortString",
-			"changedAt": "$templateTime"
-        }, {
-            "id": "PT-${idInf}-Text",
-            "title": "$cfgTypeDescription",
-            "dataType": "DT-FormattedText",
-			"changedAt": "$templateTime"
-## Create a PROPERTY-TYPE per Custom Property
-## #writeCustomPropertyTypes( $idFld "" "folder" "" )
-        }],
-        "changedAt": "$templateTime"
-##
-## resourceC 'Plan' with all intrinsic and custom properties
+## resourceClass 'Plan' with all intrinsic and custom properties
 #set( $allCategories = $dataModelProvider.getCategoryIDsForObjectType("plan"))
 ## adding default category
 #set( $dummy = $allCategories.add(0, ""))
@@ -2804,7 +2779,7 @@ $output#end##macro
     }],
 ##
 #################################
-## STATEMENT-TYPES
+## STATEMENT-CLASSES
 ## ToDo: If there are plan categories, they need to be expanded below (similarly to requirement categories)
     "statementClasses": [{
         "id": "ST-$cfgPlanShowsUniqueElementType",
@@ -2951,7 +2926,7 @@ $output#end##macro
     }],
 ##
 #################################
-## SPECIFICATION-TYPES
+## SPECIFICATION-CLASSES
 ## hierarchyClass used for specifications:
     "hierarchyClasses": [{
         "id": "HT-ACProject",
@@ -2977,16 +2952,16 @@ $output#end##macro
 ## ====== The chapter titles ======
 ## The project information:
 #set( $fileName = $project.getLogo() )
-        "id": "${idInf}-${projectID}-info",
+        "id": "${idFld}-${projectID}-info",
         "title": "$cfgProjectInformationChapterTitle",
-        "class": "RT-${idInf}",
+        "class": "RT-${idFld}",
         "properties": [{
             "title": "$cfgTypeTitle",
-            "class": "PT-${idInf}-Name",
+            "class": "PT-${idFld}-Name",
             "value": "$cfgProjectInformationChapterTitle"
         }, {
             "title": "$cfgTypeDescription",
-            "class": "PT-${idInf}-Text",
+            "class": "PT-${idFld}-Text",
             "value": "<div>#embedImgRef( $cfgProjectInformationChapterTitle, $fileName )#writeDescription( $project )#writeStakeholders( $stakeholders )#writeLegend()</div>"
         }],
 		"changedAt": "$actualTime"
