@@ -962,7 +962,7 @@ $output#end##if
 #set ( $typeID = $dataModelProvider.getDatatypeIDOfProperty( $objectTypeID, $customPropertyID ) )
 	#if( !$typeID.equals("file") || !$cfgFile_EmbeddedInObjectText )
 		}, {
-			"id": "PT-${prefixId}-${customPropertyID}",
+			"id": "PC-${prefixId}-${customPropertyID}",
 			"title": "$dataModelProvider.getDisplaynameOfProperty( $objectTypeID, $customPropertyID )",
 	#end
     #if( $typeID.equals("boolean") )
@@ -1056,7 +1056,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
 	#if( $item.hasPropertyValue( $customPropertyID ) )
 	#if( !$typeID.equals("file") || !$cfgFile_EmbeddedInObjectText )
         }, {
-            "class": "PT-${prefixId}-${customPropertyID}",
+            "class": "PC-${prefixId}-${customPropertyID}",
 	#end
 	#if( $typeID.equals("boolean") )
 #set( $temp = $item.getPropertyAsString( $customPropertyID ) )
@@ -1125,26 +1125,26 @@ $output.replaceAll('\"', '\\\"')#end##macro
     }, {
         "id": "${prefix}-$plan.getUniqueIdentifier()",
         "title": "$plan.getName()",
-        "class": "RT-${prefix}",
+        "class": "RC-${prefix}",
         "properties": [{
             "title": "$cfgTypeTitle",
-            "class": "PT-${prefix}-Name",
+            "class": "PC-${prefix}-Name",
             "value": "$plan.getName()"
         }, {
             "title": "$cfgTypeDescription",
-            "class": "PT-${prefix}-Text",
+            "class": "PC-${prefix}-Text",
 #if( $cfgPlan_EmbeddedInObjectText )
             "value": "<div>#writeDescription( $plan )#embedPlanRef( $plan.getName(), $fileName )</div>"
 #else
             "value": "<div>#writeDescription( $plan )</div>"
         }, {
             "title": "$cfgTypePlan",
-            "class": "PT-${prefix}-Diagram",
+            "class": "PC-${prefix}-Diagram",
             "value": "<div>#embedPlanRef( $plan.getName(), $fileName )</div>"
 #end##if
         }, {
             "title": "$cfgTypeNotation",
-            "class": "PT-${prefix}-Notation",
+            "class": "PC-${prefix}-Notation",
             "value": "#writePlanType( $plan )"
 ## Create a PROPERTY-VALUE per ARCWAY Custom Property:
 #writeCustomProperties( $prefix $idPln $plan )
@@ -1181,22 +1181,22 @@ $output.replaceAll('\"', '\\\"')#end##macro
     }, {
         "id": "${prefix}-$req.getUniqueIdentifier()",
         "title": "$req.getName()",
-        "class": "RT-${prefix}",
+        "class": "RC-${prefix}",
         "properties": [{
             "title": "$cfgTypeID",
-            "class": "PT-${prefix}-ID",
+            "class": "PC-${prefix}-ID",
             "value": "$req.getID()"
         }, {
             "title": "$cfgTypeTitle",
-            "class": "PT-${prefix}-Name",
+            "class": "PC-${prefix}-Name",
             "value": "$req.getName()"
         }, {
             "title": "$cfgTypeDescription",
-            "class": "PT-${prefix}-Text",
+            "class": "PC-${prefix}-Text",
             "value": "<div>#writeDescription( $req )#embedFileRefs( $req )</div>"
         }, {
             "title": "$cfgTypeStatus",
-            "class": "PT-${prefix}-Status",
+            "class": "PC-${prefix}-Status",
 #if( $req.getState().length() > 0 ) 
             "value": "V-${idReq}-Status-#makeId( $req.getState() $allReqStatusValues )"
 #else 
@@ -1204,7 +1204,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
 #end				
         }, {
             "title": "$cfgTypePriority",
-            "class": "PT-${prefix}-Priority",
+            "class": "PC-${prefix}-Priority",
 #if( $req.getPriority().length() > 0 )
             "value": "V-${idReq}-Prio-#makeId( $req.getPriority() $allReqPrioValues )"
 #else 
@@ -1233,14 +1233,14 @@ $output.replaceAll('\"', '\\\"')#end##macro
     }, {
         "id": "${idMEl}-$MEl.getUniqueIdentifier()",
         "title": "$MEl.getName()",
-        "class": "RT-${pfx}",
+        "class": "RC-${pfx}",
         "properties": [{
             "title": "$cfgTypeTitle",
-            "class": "PT-${pfx}-Name",
+            "class": "PC-${pfx}-Name",
             "value": "$MEl.getName()"
         }, {
             "title": "$cfgTypeDescription",
-            "class": "PT-${pfx}-Text",
+            "class": "PC-${pfx}-Text",
             "value": "<div>#writeDescription( $MEl )#embedFileRefs( $MEl )</div>"
 ##
 ## Create a PROPERTY-VALUE per ARCWAY Custom Property:
@@ -1270,22 +1270,22 @@ $output.replaceAll('\"', '\\\"')#end##macro
     }, {
         "id": "${prefix}-$issue.getUniqueIdentifier()",
         "title": "$issue.getID()",
-        "class": "RT-${prefix}",
+        "class": "RC-${prefix}",
         "properties": [{
             "title": "$cfgTypeID",
-            "class": "PT-${prefix}-ID",
+            "class": "PC-${prefix}-ID",
             "value": "$issue.getID()"
         }, {
             "title": "$cfgTypeTitle",
-            "class": "PT-${prefix}-Name",
+            "class": "PC-${prefix}-Name",
             "value": "$issue.getTitle()"
         }, {
             "title": "$cfgTypeDescription",
-            "class": "PT-${prefix}-Text",
+            "class": "PC-${prefix}-Text",
             "value": "<div>#writeDescription( $issue )</div>"
         }, {
             "title": "$cfgTypeStatus",
-            "class": "PT-${prefix}-Status",
+            "class": "PC-${prefix}-Status",
 #if( $issue.getStatus().length() > 0 ) 
             "value": "V-${idIss}-Status-#makeId( $issue.getStatus() $allIssueStatusValues )"
 #else 
@@ -1293,7 +1293,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
 #end				
         }, {
             "title": "$cfgTypePriority",
-            "class": "PT-${prefix}-Priority",
+            "class": "PC-${prefix}-Priority",
 #if( $issue.getPriority().length() > 0 )
             "value": "V-${idIss}-Prio-#makeId( $issue.getPriority() $allIssuePrioValues )"
 #else 
@@ -1301,14 +1301,14 @@ $output.replaceAll('\"', '\\\"')#end##macro
 #end				
         }, {
             "title": "$cfgTypeResponsible",
-            "class": "PT-${prefix}-Responsible",
+            "class": "PC-${prefix}-Responsible",
             "value": "$issue.getResponsible()"
 #set( $duedate = $issue.getDueDate_MilliSecondsSince_01_01_1970() )
 #if( $duedate && $duedate > 0 ) 
 #isoTime( $duedate, $isoDueDate )
         }, {
             "title": "$cfgTypeDueDate",
-            "class": "PT-${prefix}-DueDate",
+            "class": "PC-${prefix}-DueDate",
             "value": "$isoDueDate"
 #end				
 ##
@@ -1337,7 +1337,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
         "id": "${idPlanShowsUniqueElementType}-${plan.getUniqueIdentifier()}-$MEl.getUniqueIdentifier()",
         "title": "$cfgTypePlanShowsMEl",
 		"description": "'${plan.getName()}' $cfgLabelPlanShowsUniqueElement '${MEl.getName()}'",
-        "class": "ST-$cfgPlanShowsUniqueElementType",
+        "class": "SC-$cfgPlanShowsUniqueElementType",
         "subject": "${idPln}-$plan.getUniqueIdentifier()",
         "object": "${idMEl}-$MEl.getUniqueIdentifier()",
 #isoTimeOfDateOfLastModification( $plan, $date )
@@ -1363,7 +1363,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
         "id": "${idMElContainsMElType}-${uniqueElement.getUniqueIdentifier()}-$MEl.getUniqueIdentifier()",
         "title": "$cfgTypeMElContainsMEl",
 		"description": "'${uniqueElement.getName()}' $cfgLabelMElContainsMEl '${MEl.getName()}'",
-        "class": "ST-$cfgMElContainsMElType",
+        "class": "SC-$cfgMElContainsMElType",
         "subject": "${idMEl}-$uniqueElement.getUniqueIdentifier()",
         "object": "${idMEl}-$MEl.getUniqueIdentifier()",
         "changedAt": "$actualTime"
@@ -1382,7 +1382,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
         "id": "${idMElWritesMElType}-${uniqueElement.getUniqueIdentifier()}-$MEl.getUniqueIdentifier()",
         "title": "$cfgTypeMElWritesMEl",
 		"description": "'${uniqueElement.getName()}' $cfgLabelMElWritesMEl '${MEl.getName()}'",
-        "class": "ST-$cfgMElWritesMElType",
+        "class": "SC-$cfgMElWritesMElType",
         "subject": "${idMEl}-$uniqueElement.getUniqueIdentifier()",
         "object": "${idMEl}-$MEl.getUniqueIdentifier()",
         "changedAt": "$actualTime"
@@ -1390,7 +1390,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
         "id": "${idMElReadsMElType}-${uniqueElement.getUniqueIdentifier()}-$MEl.getUniqueIdentifier()",
         "title": "$cfgTypeMElReadsMEl",
 		"description": "'${uniqueElement.getName()}' $cfgLabelMElReadsMEl '${MEl.getName()}'",
-        "class": "ST-$cfgMElReadsMElType",
+        "class": "SC-$cfgMElReadsMElType",
         "subject": "${idMEl}-$uniqueElement.getUniqueIdentifier()",
         "object": "${idMEl}-$MEl.getUniqueIdentifier()",
         "changedAt": "$actualTime"
@@ -1407,7 +1407,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
         "id": "${idMElWritesMElType}-${uniqueElement.getUniqueIdentifier()}-$MEl.getUniqueIdentifier()",
         "title": "$cfgTypeMElWritesMEl",
 		"description": "'${uniqueElement.getName()}' $cfgLabelMElWritesMEl '${MEl.getName()}'",
-        "class": "ST-$cfgMElWritesMElType",
+        "class": "SC-$cfgMElWritesMElType",
         "subject": "${idMEl}-$uniqueElement.getUniqueIdentifier()",
         "object": "${idMEl}-$MEl.getUniqueIdentifier()",
         "changedAt": "$actualTime"
@@ -1424,7 +1424,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
         "id": "${idMElReadsMElType}-${uniqueElement.getUniqueIdentifier()}-$MEl.getUniqueIdentifier()",
         "title": "$cfgTypeMElReadsMEl",
 		"description": "'${uniqueElement.getName()}' $cfgLabelMElReadsMEl '${MEl.getName()}'",
-        "class": "ST-$cfgMElReadsMElType",
+        "class": "SC-$cfgMElReadsMElType",
         "subject": "${idMEl}-$uniqueElement.getUniqueIdentifier()",
         "object": "${idMEl}-$MEl.getUniqueIdentifier()",
         "changedAt": "$actualTime"
@@ -1444,7 +1444,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
         "id": "${idMElSendsToMElType}-${MEl.getUniqueIdentifier()}-${uniqueElement.getUniqueIdentifier()}",
         "title": "$cfgTypeMElSendsToMEl",
 		"description": "'${MEl.getName()}' $cfgLabelMElSendsToMEl '${uniqueElement.getName()}'",
-        "class": "ST-$cfgMElSendsToMElType",
+        "class": "SC-$cfgMElSendsToMElType",
         "subject": "${idMEl}-$MEl.getUniqueIdentifier()",
         "object": "${idMEl}-$uniqueElement.getUniqueIdentifier()",
         "changedAt": "$actualTime"
@@ -1452,7 +1452,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
 ##		"id": "${idMElReceivesFromMElType}-${MEl.getUniqueIdentifier()}-${uniqueElement.getUniqueIdentifier()}",
 ##		"title": "$cfgTypeMElReceivesFromMEl",
 ##		"description": "'${MEl.getName()}' $cfgLabelMElReceivesFromMEl '${uniqueElement.getName()}'",
-##		"class": "ST-$cfgMElReceivesFromMElType",
+##		"class": "SC-$cfgMElReceivesFromMElType",
 ##		"subject": "${idMEl}-$MEl.getUniqueIdentifier()",
 ##		"object": "${idMEl}-$uniqueElement.getUniqueIdentifier()",
 ##		"changedAt": "$actualTime"
@@ -1469,7 +1469,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
         "id": "${idMElSendsToMElType}-${MEl.getUniqueIdentifier()}-${uniqueElement.getUniqueIdentifier()}",
         "title": "$cfgTypeMElSendsToMEl",
 		"description": "'${MEl.getName()}' $cfgLabelMElSendsToMEl '${uniqueElement.getName()}'",
-        "class": "ST-$cfgMElSendsToMElType",
+        "class": "SC-$cfgMElSendsToMElType",
         "subject": "${idMEl}-$MEl.getUniqueIdentifier()",
         "object": "${idMEl}-$uniqueElement.getUniqueIdentifier()",
         "changedAt": "$actualTime"
@@ -1486,7 +1486,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
 ##		"id": "${idMElReceivesFromMElType}-${MEl.getUniqueIdentifier()}-${uniqueElement.getUniqueIdentifier()}",
 ##		"title": "$cfgTypeMElReceivesFromMEl",
 ##		"description": "'${MEl.getName()}' $cfgLabelMElReceivesFromMEl '${uniqueElement.getName()}'",
-##		"class": "ST-$cfgMElReceivesFromMElType",
+##		"class": "SC-$cfgMElReceivesFromMElType",
 ##		"subject": "${idMEl}-$MEl.getUniqueIdentifier()",
 ##		"object": "${idMEl}-$uniqueElement.getUniqueIdentifier()",
 ##		"changedAt": "$actualTime"
@@ -1506,7 +1506,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
         "id": "${idMElInfluencesMElType}-${MEl.getUniqueIdentifier()}-${uniqueElement.getUniqueIdentifier()}",
         "title": "$cfgTypeMElInfluencesMEl",
 		"description": "'${MEl.getName()}' $cfgLabelMElInfluencesMEl '${uniqueElement.getName()}'",
-        "class": "ST-$cfgMElInfluencesMElType",
+        "class": "SC-$cfgMElInfluencesMElType",
         "subject": "${idMEl}-${uniqueElement.getUniqueIdentifier()}",
         "object": "${idMEl}-${MEl.getUniqueIdentifier()}",
         "changedAt": "$actualTime"
@@ -1527,7 +1527,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
         "id": "${idMElPrecedesMElType}-${uniqueElement.getUniqueIdentifier()}-$MEl.getUniqueIdentifier()",
         "title": "$cfgTypeMElPrecedesMEl",
 		"description": "'${MEl.getName()}' $cfgLabelMElPrecedesMEl '${uniqueElement.getName()}'",
-        "class": "ST-$cfgMElPrecedesMElType",
+        "class": "SC-$cfgMElPrecedesMElType",
         "subject": "${idMEl}-$MEl.getUniqueIdentifier()",
         "object": "${idMEl}-$uniqueElement.getUniqueIdentifier()",
         "changedAt": "$actualTime"
@@ -1553,7 +1553,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
         "id": "${idMElLinkedAnnotationType}-$req.getUniqueIdentifier()-$MEl.getUniqueIdentifier()",
         "title": "$cfgTypeMElLinkedAnnotation",
 		"description": "'$req.getName()' $cfgLabelMElLinkedAnnotation '$MEl.getName()'",
-        "class": "ST-$cfgMElLinkedAnnotationType",
+        "class": "SC-$cfgMElLinkedAnnotationType",
         "subject": "${prefix}-$req.getUniqueIdentifier()",
         "object": "${idMEl}-$MEl.getUniqueIdentifier()",
         "changedAt": "$actualTime"
@@ -1561,7 +1561,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
         "id": "${idMElLinkedRequirementType}-${MEl.getUniqueIdentifier()}-$req.getUniqueIdentifier()",
         "title": "$cfgTypeMElLinkedRequirement",
 		"description": "'${MEl.getName()}' $cfgLabelMElLinkedRequirement '${req.getName()}'",
-        "class": "ST-$cfgMElLinkedRequirementType",
+        "class": "SC-$cfgMElLinkedRequirementType",
         "subject": "${idMEl}-$MEl.getUniqueIdentifier()",
         "object": "${prefix}-$req.getUniqueIdentifier()",
         "changedAt": "$actualTime"
@@ -1587,7 +1587,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
         "id": "${idRequirementReferenceType}-${req.getUniqueIdentifier()}-$target.getUniqueIdentifier()",
         "title": "$cfgTypeRequirementReferring",
 		"description": "'${req.getName()}' $cfgLabelRequirementReferring '${target.getName()}'",
-        "class": "ST-$cfgRequirementReferenceType",
+        "class": "SC-$cfgRequirementReferenceType",
         "subject": "${prefix}-$req.getUniqueIdentifier()",
         "object": "${prefixTarget}-$target.getUniqueIdentifier()",
         "changedAt": "$actualTime"
@@ -1611,7 +1611,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
         "id": "${idIssueLinkType}-${issue.getUniqueIdentifier()}-$target.getUniqueIdentifier()",
         "title": "$cfgTypeIssueLink",
 		"description": "'${issue.getTitle()}' $cfgLabelIssueLink '${target.getDisplayName()}'",
-        "class": "ST-$cfgIssueLinkType",
+        "class": "SC-$cfgIssueLinkType",
         "subject": "${idIss}-$issue.getUniqueIdentifier()",
         "object": "${prefixTarget}-$target.getUniqueIdentifier()",
         "changedAt": "$actualTime"
@@ -1632,7 +1632,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
         "id": "${idIssueLinkType}-${issue.getUniqueIdentifier()}-$target.getUniqueIdentifier()",
         "title": "$cfgTypeIssueLink",
 		"description": "'${issue.getTitle()}' $cfgLabelIssueLink '${target.getDisplayName()}'",
-        "class": "ST-$cfgIssueLinkType",
+        "class": "SC-$cfgIssueLinkType",
         "subject": "${idIss}-$issue.getUniqueIdentifier()",
         "object": "${idMEl}-$target.getUniqueIdentifier()",
         "changedAt": "$actualTime"
@@ -1717,14 +1717,14 @@ $output.replaceAll('\"', '\\\"')#end##macro
     }, {
         "id": "${idFld}-${folder.getUniqueIdentifier()}",
         "title": "$folder.getName()",
-        "class": "RT-Fld",
+        "class": "RC-${idFld}",
         "properties": [{
             "title": "$cfgTypeTitle",
-            "class": "PT-${idFld}-Name",
+            "class": "PC-${idFld}-Name",
             "value": "$folder.getName()"
         }, {
             "title": "$cfgTypeDescription",
-            "class": "PT-${idFld}-Text",
+            "class": "PC-${idFld}-Text",
             "value": "<div>#writeDescription( $folder )#embedFileRefs( $folder )</div>"
         }],
 #isoTimeOfDateOfLastModification( $folder, $date )
@@ -1748,14 +1748,14 @@ $output.replaceAll('\"', '\\\"')#end##macro
 	}, {
 		"id": "${idFld}-${projectID}-BoM",
 		"title": "$cfgStrippedFolderNameBom",
-        "class": "RT-${idFld}",
+        "class": "RC-${idFld}",
         "properties": [{
             "title": "dcterms:title",
-            "class": "PT-${idFld}-Name",
+            "class": "PC-${idFld}-Name",
             "value": "$cfgStrippedFolderNameBom"
         }, {
             "title": "dcterms:description",
-            "class": "PT-${idFld}-Text",
+            "class": "PC-${idFld}-Text",
 			"value": "<p>${cfgBomFolderDescription}</p>"
 		}],
         "changedAt": "$actualTime"
@@ -1775,14 +1775,14 @@ $output.replaceAll('\"', '\\\"')#end##macro
 	}, {
 		"id": "${idFld}-${reqSet.getUniqueIdentifier()}",
 		"title": "$reqSet.getName()",
-        "class": "RT-${idFld}",
+        "class": "RC-${idFld}",
         "properties": [{
             "title": "dcterms:title",
-            "class": "PT-${idFld}-Name",
+            "class": "PC-${idFld}-Name",
             "value": "$reqSet.getName()"
         }, {
             "title": "dcterms:description",
-            "class": "PT-${idFld}-Text",
+            "class": "PC-${idFld}-Text",
 			"value": "<div>#writeDescription( $reqSet )</div>"
 		}],
         "changedAt": "$actualTime"
@@ -1808,14 +1808,14 @@ $output.replaceAll('\"', '\\\"')#end##macro
 	}, {
 		"id": "${idFld}-${issueSet.getUniqueIdentifier()}",
 		"title": "$issueSet.getName()",
-        "class": "RT-${idFld}",
+        "class": "RC-${idFld}",
         "properties": [{
             "title": "dcterms:title",
-            "class": "PT-${idFld}-Name",
+            "class": "PC-${idFld}-Name",
             "value": "$issueSet.getName()"
         }, {
             "title": "dcterms:description",
-            "class": "PT-${idFld}-Text",
+            "class": "PC-${idFld}-Text",
 			"value": "<div>#writeDescription( $issueSet )</div>"
 		}],
         "changedAt": "$actualTime"
@@ -2456,7 +2456,7 @@ $output#end##macro
 ##
 ## resourceClass 'Folder' used for both folders and requirement-sets.
 ## Folder categories are not supported; for a solution see ReqIF-export-61.rpttpl.
-        "id": "RT-${idFld}",
+        "id": "RC-${idFld}",
         "title": "$cfgTypeFolder",
         "description": "$cfgFolderDescription",
         "instantiation": ["auto","user"],
@@ -2465,12 +2465,12 @@ $output#end##macro
 #end
 		"isHeading": true,
         "propertyClasses": [{
-            "id": "PT-${idFld}-Name",
+            "id": "PC-${idFld}-Name",
             "title": "$cfgTypeTitle",
             "dataType": "DT-ShortString",
 			"changedAt": "$templateTime"
         }, {
-            "id": "PT-${idFld}-Text",
+            "id": "PC-${idFld}-Text",
             "title": "$cfgTypeDescription",
             "dataType": "DT-FormattedText",
 			"changedAt": "$templateTime"
@@ -2490,7 +2490,7 @@ $output#end##macro
 	#set ( $prefix = "${idPln}-${categoryID}" )
 #end
 	}, {
-        "id": "RT-${prefix}",
+        "id": "RC-${prefix}",
         "title": "$cfgTypePlan",
         "description": "$cfgPlanDescription",
         "instantiation": ["auto"],
@@ -2498,25 +2498,25 @@ $output#end##macro
 		"icon": "${iconPln}",
 #end
         "propertyClasses": [{
-            "id": "PT-${prefix}-Name",
+            "id": "PC-${prefix}-Name",
             "title": "$cfgTypeTitle",
             "dataType": "DT-ShortString",
 			"changedAt": "$templateTime"
         }, {
-            "id": "PT-${prefix}-Text",
+            "id": "PC-${prefix}-Text",
             "title": "$cfgTypeDescription",
             "dataType": "DT-FormattedText",
 			"changedAt": "$templateTime"
 #if( !$cfgPlan_EmbeddedInObjectText )
 ## Create a property to reference the Model View
         }, {
-            "id": "PT-${prefix}-Diagram",
+            "id": "PC-${prefix}-Diagram",
             "title": "$cfgTypePlan",
             "dataType": "DT-FormattedText",
 			"changedAt": "$templateTime"
 #end##if
         }, {
-            "id": "PT-${prefix}-Notation",
+            "id": "PC-${prefix}-Notation",
             "title": "$cfgTypeNotation",
             "dataType": "DT-ShortString",
 			"changedAt": "$templateTime"
@@ -2529,7 +2529,7 @@ $output#end##macro
 ## resourceClass 'Model-Element' of type Actor with all intrinsic and custom properties:
 ## Up until rev=58 all model-element categories have been properly generated, now only the default category is supported.
 	}, {
-        "id": "RT-${idAct}",
+        "id": "RC-${idAct}",
         "title": "$cfgTypeActor",
         "description": "$cfgActorDescription",
         "instantiation": ["auto"],
@@ -2537,12 +2537,12 @@ $output#end##macro
 		"icon": "${iconAct}",
 #end
         "propertyClasses": [{
-            "id": "PT-${idAct}-Name",
+            "id": "PC-${idAct}-Name",
             "title": "$cfgTypeTitle",
             "dataType": "DT-ShortString",
 			"changedAt": "$templateTime"
         }, {
-            "id": "PT-${idAct}-Text",
+            "id": "PC-${idAct}-Text",
             "title": "$cfgTypeDescription",
             "dataType": "DT-FormattedText",
 			"changedAt": "$templateTime"
@@ -2557,7 +2557,7 @@ $output#end##macro
 ## resourceClass 'Model-Element' of type State with all intrinsic and custom properties:
 ## Up until rev=58 all model-element categories have been properly generated, now only the default category is supported.
 	}, {
-        "id": "RT-${idSta}",
+        "id": "RC-${idSta}",
         "title": "$cfgTypeState",
         "description": "$cfgStateDescription",
         "instantiation": ["auto"],
@@ -2565,12 +2565,12 @@ $output#end##macro
 		"icon": "${iconSta}",
 #end
         "propertyClasses": [{
-            "id": "PT-${idSta}-Name",
+            "id": "PC-${idSta}-Name",
             "title": "$cfgTypeTitle",
             "dataType": "DT-ShortString",
 			"changedAt": "$templateTime"
         }, {
-            "id": "PT-${idSta}-Text",
+            "id": "PC-${idSta}-Text",
             "title": "$cfgTypeDescription",
             "dataType": "DT-FormattedText",
 			"changedAt": "$templateTime"
@@ -2585,7 +2585,7 @@ $output#end##macro
 ## resourceClass 'Model-Element' of type Event with all intrinsic and custom properties
 ## Up until rev=58 all model-element categories have been properly generated, now only the default category is supported.
 	}, {
-        "id": "RT-${idEvt}",
+        "id": "RC-${idEvt}",
         "title": "$cfgTypeEvent",
         "description": "$cfgEventDescription",
         "instantiation": ["auto"],
@@ -2593,12 +2593,12 @@ $output#end##macro
 		"icon": "${iconEvt}",
 #end
         "propertyClasses": [{
-            "id": "PT-${idEvt}-Name",
+            "id": "PC-${idEvt}-Name",
             "title": "$cfgTypeTitle",
             "dataType": "DT-ShortString",
 			"changedAt": "$templateTime"
         }, {
-            "id": "PT-${idEvt}-Text",
+            "id": "PC-${idEvt}-Text",
             "title": "$cfgTypeDescription",
             "dataType": "DT-FormattedText",
 			"changedAt": "$templateTime"
@@ -2621,7 +2621,7 @@ $output#end##macro
 	#if( $arrayHelper.getArraySize( $allReqCategories )==1 )
 ## No requirement categories have been defined; the requirement is considered as such:	
 	#set ( $prefix = "${idReq}" )
-        "id": "RT-${prefix}",
+        "id": "RC-${prefix}",
         "title": "$cfgTypeRequirement",
         "description": "$cfgRequirementDescription",
 #if( $iconReq.length()>0 )
@@ -2631,14 +2631,14 @@ $output#end##macro
 ## Requirement categories have been defined; the default category carries all custom properties.
 ## The default should not be used, but it can be used in AC, so we provide a type:
 	#set ( $prefix = "${idReq}-default" )
-        "id": "RT-${prefix}",
+        "id": "RC-${prefix}",
         "title": "${cfgLabelRequirement} (default)",
 ##		"description": "$cfgRequirementDescription",
 	#end
 ## Here the defined categories are processed, if there are any:
 #elseif( $categoryID.equals($cfgReqCategoryRequirement) )
 	#set ( $prefix = "${idReq}" )
-        "id": "RT-${prefix}",
+        "id": "RC-${prefix}",
         "title": "$cfgTypeRequirement",
         "description": "$cfgRequirementDescription",
 #if( $iconReq.length()>0 )
@@ -2646,7 +2646,7 @@ $output#end##macro
 #end
 #elseif( $categoryID.equals($cfgReqCategoryFeature) )
 	#set ( $prefix = "${idFea}" )
-        "id": "RT-${prefix}",
+        "id": "RC-${prefix}",
         "title": "$cfgTypeFeature",
         "description": "$cfgFeatureDescription",
 #if( $iconFea.length()>0 )
@@ -2654,7 +2654,7 @@ $output#end##macro
 #end
 #elseif( $categoryID.equals($cfgReqCategoryAnnotation) )
 	#set ( $prefix = "${idAnn}" )
-        "id": "RT-${prefix}",
+        "id": "RC-${prefix}",
         "title": "$cfgTypeAnnotation",
         "description": "$cfgAnnotationDescription",
 #if( $iconAnn.length()>0 )
@@ -2662,7 +2662,7 @@ $output#end##macro
 #end
 #else
 	#set ( $prefix = "${idReq}-${categoryID}" )
-        "id": "RT-${prefix}",
+        "id": "RC-${prefix}",
         "title": "$dataModelProvider.getDisplaynameOfCategory( 'gm.requirementsmodule3.requirement', $categoryID )",
 ##		"description": "$cfgRequirementDescription",
 #if( $iconReq.length()>0 )
@@ -2671,28 +2671,28 @@ $output#end##macro
 #end##if
         "instantiation": ["user"],
         "propertyClasses": [{
-            "id": "PT-${prefix}-ID",
+            "id": "PC-${prefix}-ID",
             "title": "$cfgTypeID",
             "dataType": "DT-ShortString",
 			"changedAt": "$templateTime"
         }, {
-            "id": "PT-${prefix}-Name",
+            "id": "PC-${prefix}-Name",
             "title": "$cfgTypeTitle",
             "dataType": "DT-ShortString",
 			"changedAt": "$templateTime"
         }, {
-            "id": "PT-${prefix}-Text",
+            "id": "PC-${prefix}-Text",
             "title": "$cfgTypeDescription",
             "dataType": "DT-FormattedText",
 			"changedAt": "$templateTime"
         }, {
-            "id": "PT-${prefix}-Status",
+            "id": "PC-${prefix}-Status",
             "title": "$cfgTypeStatus",
             "dataType": "DT-${idReq}-Status",
 ##			"multiple": false,
 			"changedAt": "$templateTime"
         }, {
-            "id": "PT-${prefix}-Priority",
+            "id": "PC-${prefix}-Priority",
             "title": "$cfgTypePriority",
             "dataType": "DT-${idReq}-Priority",
 ##			"multiple": false,
@@ -2706,7 +2706,7 @@ $output#end##macro
 ## #if( $arrayHelper.getArraySize( $requirementDataProvider.getAllRequirementNotes() ) > 0 )
 ## A PROPERTY-TYPE for requirement notes:
 ##		}, {
-##			"id": "PT-${prefix}-Notes",
+##			"id": "PC-${prefix}-Notes",
 ##			"title": "$cfgTypeNote",
 ##			"dataType": "DT-FormattedText",
 ##			"changedAt": "$templateTime"
@@ -2728,7 +2728,7 @@ $output#end##macro
 ## #else
 ##	#set ( $prefix = "${idIss}-${categoryID}")
 ## #end
-        "id": "RT-${prefix}",
+        "id": "RC-${prefix}",
         "title": "$cfgTypeIssue",
         "description": "$cfgIssueDescription",
         "instantiation": ["user","auto"],
@@ -2736,37 +2736,37 @@ $output#end##macro
 		"icon": "${iconIss}",
 #end
         "propertyClasses": [{
-            "id": "PT-${prefix}-ID",
+            "id": "PC-${prefix}-ID",
             "title": "$cfgTypeID",
             "dataType": "DT-ShortString",
 			"changedAt": "$templateTime"
         }, {
-            "id": "PT-${prefix}-Name",
+            "id": "PC-${prefix}-Name",
             "title": "$cfgTypeTitle",
             "dataType": "DT-ShortString",
 			"changedAt": "$templateTime"
         }, {
-            "id": "PT-${prefix}-Text",
+            "id": "PC-${prefix}-Text",
             "title": "$cfgTypeDescription",
             "dataType": "DT-FormattedText",
 			"changedAt": "$templateTime"
         }, {
-            "id": "PT-${prefix}-Status",
+            "id": "PC-${prefix}-Status",
             "title": "$cfgTypeStatus",
             "dataType": "DT-${idIss}-Status",
 			"changedAt": "$templateTime"
         }, {
-            "id": "PT-${prefix}-Priority",
+            "id": "PC-${prefix}-Priority",
             "title": "$cfgTypePriority",
             "dataType": "DT-${idIss}-Priority",
 			"changedAt": "$templateTime"
         }, {
-            "id": "PT-${prefix}-Responsible",
+            "id": "PC-${prefix}-Responsible",
             "title": "$cfgTypeResponsible",
             "dataType": "DT-ShortString",
 			"changedAt": "$templateTime"
         }, {
-            "id": "PT-${prefix}-DueDate",
+            "id": "PC-${prefix}-DueDate",
             "title": "$cfgTypeDueDate",
             "dataType": "DT-Date",
 			"changedAt": "$templateTime"
@@ -2782,86 +2782,86 @@ $output#end##macro
 ## STATEMENT-CLASSES
 ## ToDo: If there are plan categories, they need to be expanded below (similarly to requirement categories)
     "statementClasses": [{
-        "id": "ST-$cfgPlanShowsUniqueElementType",
+        "id": "SC-$cfgPlanShowsUniqueElementType",
         "title": "$cfgTypePlanShowsMEl",
         "description": "$cfgLabelPlan $cfgLabelPlanShowsUniqueElement $cfgLabelUniqueElement",
         "instantiation": ["auto"],
-        "subjectClasses": ["RT-$idPln"],
-        "objectClasses": ["RT-$idAct", "RT-$idSta", "RT-$idEvt"],
+        "subjectClasses": ["RC-$idPln"],
+        "objectClasses": ["RC-$idAct", "RC-$idSta", "RC-$idEvt"],
         "changedAt": "$templateTime"
     }, {
-        "id": "ST-$cfgMElContainsMElType",
+        "id": "SC-$cfgMElContainsMElType",
         "title": "$cfgTypeMElContainsMEl",
         "description": "$cfgLabelUniqueElement $cfgLabelMElContainsMEl $cfgLabelUniqueElement",
         "instantiation": ["auto"],
-        "subjectClasses": ["RT-$idAct", "RT-$idSta", "RT-$idEvt"],
-        "objectClasses": ["RT-$idAct", "RT-$idSta", "RT-$idEvt"],
+        "subjectClasses": ["RC-$idAct", "RC-$idSta", "RC-$idEvt"],
+        "objectClasses": ["RC-$idAct", "RC-$idSta", "RC-$idEvt"],
         "changedAt": "$templateTime"
 ##    }, {
-##        "id": "ST-$cfgMElWritesAndReadsMElType",
+##        "id": "SC-$cfgMElWritesAndReadsMElType",
 ##        "title": "$cfgTypeMElWritesAndReadsMEl",
 ##        "description": "$cfgLabelActor $cfgLabelMElWritesAndReadsMEl $cfgLabelState",
 ##        "instantiation": ["auto"],
-##        "subjectClasses": ["RT-$idAct"],
-##        "objectClasses": ["RT-$idSta"],
+##        "subjectClasses": ["RC-$idAct"],
+##        "objectClasses": ["RC-$idSta"],
 ##        "changedAt": "$templateTime"
     }, {
-        "id": "ST-$cfgMElWritesMElType",
+        "id": "SC-$cfgMElWritesMElType",
         "title": "$cfgTypeMElWritesMEl",
         "description": "$cfgLabelActor $cfgLabelMElWritesMEl $cfgLabelState",
         "instantiation": ["auto"],
-        "subjectClasses": ["RT-$idAct"],
-        "objectClasses": ["RT-$idSta"],
+        "subjectClasses": ["RC-$idAct"],
+        "objectClasses": ["RC-$idSta"],
         "changedAt": "$templateTime"
     }, {
-        "id": "ST-$cfgMElReadsMElType",
+        "id": "SC-$cfgMElReadsMElType",
         "title": "$cfgTypeMElReadsMEl",
         "description": "$cfgLabelActor $cfgLabelMElReadsMEl $cfgLabelState",
         "instantiation": ["auto"],
-        "subjectClasses": ["RT-$idAct"],
-        "objectClasses": ["RT-$idSta"],
+        "subjectClasses": ["RC-$idAct"],
+        "objectClasses": ["RC-$idSta"],
         "changedAt": "$templateTime"
     }, {
-        "id": "ST-$cfgMElSendsToMElType",
+        "id": "SC-$cfgMElSendsToMElType",
         "title": "$cfgTypeMElSendsToMEl",
         "description": "$cfgLabelActor $cfgLabelMElSendsToMEl $cfgLabelActor",
         "instantiation": ["auto"],
-        "subjectClasses": ["RT-$idAct"],
-        "objectClasses": ["RT-$idAct"],
+        "subjectClasses": ["RC-$idAct"],
+        "objectClasses": ["RC-$idAct"],
         "changedAt": "$templateTime"
 ##    }, {
-##        "id": "ST-$cfgMElReceivesFromMElType",
+##        "id": "SC-$cfgMElReceivesFromMElType",
 ##        "title": "$cfgTypeMElReceivesFromMEl",
 ##        "description": "$cfgLabelActor $cfgLabelMElReceivesFromMEl $cfgLabelState",
 ##        "instantiation": ["auto"],
-##        "subjectClasses": ["RT-$idAct"],
-##        "objectClasses": ["RT-$idAct"],
+##        "subjectClasses": ["RC-$idAct"],
+##        "objectClasses": ["RC-$idAct"],
 ##        "changedAt": "$templateTime"
     }, {
-        "id": "ST-$cfgMElInfluencesMElType",
+        "id": "SC-$cfgMElInfluencesMElType",
         "title": "$cfgTypeMElInfluencesMEl",
         "description": "$cfgLabelState $cfgLabelMElInfluencesMEl $cfgLabelState",
         "instantiation": ["auto"],
-        "subjectClasses": ["RT-$idSta"],
-        "objectClasses": ["RT-$idSta"],
+        "subjectClasses": ["RC-$idSta"],
+        "objectClasses": ["RC-$idSta"],
         "changedAt": "$templateTime"
     }, {
-        "id": "ST-$cfgMElPrecedesMElType",
+        "id": "SC-$cfgMElPrecedesMElType",
         "title": "$cfgTypeMElPrecedesMEl",
         "description": "$cfgLabelUniqueElement $cfgLabelMElPrecedesMEl $cfgLabelUniqueElement",
         "instantiation": ["auto"],
-        "subjectClasses": ["RT-$idAct", "RT-$idEvt"],
-        "objectClasses": ["RT-$idAct", "RT-$idEvt"],
+        "subjectClasses": ["RC-$idAct", "RC-$idEvt"],
+        "objectClasses": ["RC-$idAct", "RC-$idEvt"],
         "changedAt": "$templateTime"
 ##
 #macro( writeReqIDs )
 #if( $arrayHelper.getArraySize( $allReqCategories )==1 )
-"RT-${idReq}"
+"RC-${idReq}"
 #else
 #set( $valCnt = 0 )
 #foreach($categoryID in $allReqCategories)
 #if( $valCnt > 0 ), #end
-#if( $categoryID.equals("") )"RT-${idReq}-default"#elseif( $categoryID.equals($cfgReqCategoryRequirement) )"RT-${idReq}"#elseif( $categoryID.equals($cfgReqCategoryFeature) )"RT-${idFea}"#elseif( $categoryID.equals($cfgReqCategoryAnnotation) )"RT-${idAnn}"#else"RT-${idReq}-${categoryID}"#end
+#if( $categoryID.equals("") )"RC-${idReq}-default"#elseif( $categoryID.equals($cfgReqCategoryRequirement) )"RC-${idReq}"#elseif( $categoryID.equals($cfgReqCategoryFeature) )"RC-${idFea}"#elseif( $categoryID.equals($cfgReqCategoryAnnotation) )"RC-${idAnn}"#else"RC-${idReq}-${categoryID}"#end
 #set( $valCnt = $valCnt + 1 )
 #end##foreach
 #end
@@ -2871,14 +2871,14 @@ $output#end##macro
 #foreach($categoryID in $allReqCategories)
 #if( $categoryID != $cfgReqCategoryAnnotation )
 #if( $valCnt > 0 ), #end
-#if( $categoryID.equals("") )"RT-${idReq}-default"#elseif( $categoryID.equals($cfgReqCategoryRequirement) )"RT-${idReq}"#elseif( $categoryID.equals($cfgReqCategoryFeature) )"RT-${idFea}"#else"RT-${idReq}-${categoryID}"#end
+#if( $categoryID.equals("") )"RC-${idReq}-default"#elseif( $categoryID.equals($cfgReqCategoryRequirement) )"RC-${idReq}"#elseif( $categoryID.equals($cfgReqCategoryFeature) )"RC-${idFea}"#else"RC-${idReq}-${categoryID}"#end
 #set( $valCnt = $valCnt + 1 )
 #end
 #end##foreach
 #end##macro
 #if( $projectHasReqs )
     }, {
-        "id": "ST-$cfgRequirementReferenceType",
+        "id": "SC-$cfgRequirementReferenceType",
         "title": "$cfgTypeRequirementReferring",
         "description": "$cfgLabelRequirement $cfgLabelRequirementReferring $cfgLabelRequirement",
         "instantiation": ["user"],
@@ -2887,40 +2887,40 @@ $output#end##macro
         "changedAt": "$templateTime"
 #if( $allReqCategories.contains($cfgReqCategoryAnnotation) )
     }, {
-        "id": "ST-$cfgMElLinkedAnnotationType",
+        "id": "SC-$cfgMElLinkedAnnotationType",
         "title": "$cfgTypeMElLinkedAnnotation",
         "description": "$cfgLabelAnnotation $cfgLabelMElLinkedAnnotation $cfgLabelUniqueElement",
         "instantiation": ["user", "auto"],
-        "subjectClasses": ["RT-$idAnn"],
-        "objectClasses": ["RT-$idAct", "RT-$idSta", "RT-$idEvt"],
+        "subjectClasses": ["RC-$idAnn"],
+        "objectClasses": ["RC-$idAct", "RC-$idSta", "RC-$idEvt"],
         "changedAt": "$templateTime"
     }, {
-        "id": "ST-$cfgMElLinkedRequirementType",
+        "id": "SC-$cfgMElLinkedRequirementType",
         "title": "$cfgTypeMElLinkedRequirement",
         "description": "$cfgLabelUniqueElement $cfgLabelMElLinkedRequirement $cfgLabelRequirement",
         "instantiation": ["user", "auto"],
-        "subjectClasses": ["RT-$idAct", "RT-$idSta", "RT-$idEvt"],
+        "subjectClasses": ["RC-$idAct", "RC-$idSta", "RC-$idEvt"],
         "objectClasses": [#writeReqIDsWithoutAnn()],
         "changedAt": "$templateTime"
 #else
     }, {
-        "id": "ST-$cfgMElLinkedRequirementType",
+        "id": "SC-$cfgMElLinkedRequirementType",
         "title": "$cfgTypeMElLinkedRequirement",
         "description": "$cfgLabelUniqueElement $cfgLabelMElLinkedRequirement $cfgLabelRequirement",
         "instantiation": ["user", "auto"],
-        "subjectClasses": ["RT-$idAct", "RT-$idSta", "RT-$idEvt"],
+        "subjectClasses": ["RC-$idAct", "RC-$idSta", "RC-$idEvt"],
         "objectClasses": [#writeReqIDs()],
         "changedAt": "$templateTime"
 #end
 #end##if( $projectHasReqs )
 #if( $projectHasIssues )
     }, {
-        "id": "ST-$cfgIssueLinkType",
+        "id": "SC-$cfgIssueLinkType",
         "title": "$cfgTypeIssueLink",
         "description": "$cfgLabelIssueType $cfgLabelIssueLink $cfgLabelPlan/$cfgLabelUniqueElement/$cfgLabelRequirement",
         "instantiation": ["user", "auto"],
-        "subjectClasses": ["RT-$idIss"],
-        "objectClasses": ["RT-$idPln", "RT-$idAct", "RT-$idSta", "RT-$idEvt", #writeReqIDs()],
+        "subjectClasses": ["RC-$idIss"],
+        "objectClasses": ["RC-$idPln", "RC-$idAct", "RC-$idSta", "RC-$idEvt", #writeReqIDs()],
         "changedAt": "$templateTime"
 #end
     }],
@@ -2929,16 +2929,16 @@ $output#end##macro
 ## SPECIFICATION-CLASSES
 ## hierarchyClass used for specifications:
     "hierarchyClasses": [{
-        "id": "HT-ACProject",
+        "id": "HC-ACProject",
         "title": "SpecIF:Hierarchy",
         "description": "$cfgSpecDescription",
         "propertyClasses": [{
-            "id": "PT-ACProject-Name",
+            "id": "PC-ACProject-Name",
             "title": "$cfgTypeTitle",
             "dataType": "DT-ShortString",
 			"changedAt": "$templateTime"
         }, {
-            "id": "PT-ACProject-Text",
+            "id": "PC-ACProject-Text",
             "title": "$cfgTypeDescription",
             "dataType": "DT-FormattedText",
 			"changedAt": "$templateTime"
@@ -2954,14 +2954,14 @@ $output#end##macro
 #set( $fileName = $project.getLogo() )
         "id": "${idFld}-${projectID}-info",
         "title": "$cfgProjectInformationChapterTitle",
-        "class": "RT-${idFld}",
+        "class": "RC-${idFld}",
         "properties": [{
             "title": "$cfgTypeTitle",
-            "class": "PT-${idFld}-Name",
+            "class": "PC-${idFld}-Name",
             "value": "$cfgProjectInformationChapterTitle"
         }, {
             "title": "$cfgTypeDescription",
-            "class": "PT-${idFld}-Text",
+            "class": "PC-${idFld}-Text",
             "value": "<div>#embedImgRef( $cfgProjectInformationChapterTitle, $fileName )#writeDescription( $project )#writeStakeholders( $stakeholders )#writeLegend()</div>"
         }],
 		"changedAt": "$actualTime"
@@ -2978,56 +2978,56 @@ $output#end##macro
     }, {
         "id": "${idFld}-${projectID}-glossary",
         "title": "$cfgGlossaryChapterTitle",
-        "class": "RT-${idFld}",
+        "class": "RC-${idFld}",
         "properties": [{
             "title": "$cfgTypeTitle",
-            "class": "PT-${idFld}-Name",
+            "class": "PC-${idFld}-Name",
             "value": "$cfgGlossaryChapterTitle"
         }, {
             "title": "$cfgTypeDescription",
-            "class": "PT-${idFld}-Text",
+            "class": "PC-${idFld}-Text",
             "value": "<div/>"
         }],
 		"changedAt": "$templateTime"
     }, {
         "id": "${idFld}-${projectID}-$idAct",
         "title": "$cfgActorsChapterTitle",
-        "class": "RT-${idFld}",
+        "class": "RC-${idFld}",
         "properties": [{
             "title": "$cfgTypeTitle",
-            "class": "PT-${idFld}-Name",
+            "class": "PC-${idFld}-Name",
             "value": "$cfgActorsChapterTitle"
         }, {
             "title": "$cfgTypeDescription",
-            "class": "PT-${idFld}-Text",
+            "class": "PC-${idFld}-Text",
             "value": "<div><p>$cfgActorDescription</p></div>"
         }],
 		"changedAt": "$templateTime"
     }, {
         "id": "${idFld}-${projectID}-$idSta",
         "title": "$cfgStatesChapterTitle",
-        "class": "RT-${idFld}",
+        "class": "RC-${idFld}",
         "properties": [{
             "title": "$cfgTypeTitle",
-            "class": "PT-${idFld}-Name",
+            "class": "PC-${idFld}-Name",
             "value": "$cfgStatesChapterTitle"
         }, {
             "title": "$cfgTypeDescription",
-            "class": "PT-${idFld}-Text",
+            "class": "PC-${idFld}-Text",
             "value": "<div><p>$cfgStateDescription</p></div>"
         }],
 		"changedAt": "$templateTime"
     }, {
         "id": "${idFld}-${projectID}-$idEvt",
         "title": "$cfgEventsChapterTitle",
-        "class": "RT-${idFld}",
+        "class": "RC-${idFld}",
         "properties": [{
             "title": "$cfgTypeTitle",
-            "class": "PT-${idFld}-Name",
+            "class": "PC-${idFld}-Name",
             "value": "$cfgEventsChapterTitle"
         }, {
             "title": "$cfgTypeDescription",
-            "class": "PT-${idFld}-Text",
+            "class": "PC-${idFld}-Text",
             "value": "<div><p>$cfgEventDescription</p></div>"
         }],
 		"changedAt": "$templateTime"
@@ -3115,10 +3115,10 @@ $output#end##macro
 	"hierarchies": [{
         "id": "$specID",
         "title": "${title}",
-        "class": "HT-ACProject",
+        "class": "HC-ACProject",
 		"properties": [{
             "title": "$cfgTypeTitle",
-            "class": "PT-ACProject-Name",
+            "class": "PC-ACProject-Name",
             "value": "${title}"
 		}],
         "nodes": [{
