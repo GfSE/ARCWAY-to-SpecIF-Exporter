@@ -2474,6 +2474,11 @@ $output#end##macro
             "title": "$cfgTypeDescription",
             "dataType": "DT-FormattedText",
 			"changedAt": "$templateTime"
+        }, {
+            "id": "PC-${idFld}-Type",
+            "title": "dcterms:type",
+            "dataType": "DT-ShortString",
+			"changedAt": "$templateTime"
 ## Create a PROPERTY-TYPE per Custom Property
 ## #writeCustomPropertyTypes( $idFld "" "folder" "" )
         }],
@@ -2546,6 +2551,11 @@ $output#end##macro
             "title": "$cfgTypeDescription",
             "dataType": "DT-FormattedText",
 			"changedAt": "$templateTime"
+        }, {
+            "id": "PC-${idAct}-Type",
+            "title": "dcterms:type",
+            "dataType": "DT-ShortString",
+			"changedAt": "$templateTime"
 ## Add a property type per custom property of model elements:
 #writeCustomPropertyTypes( $idAct $idMEl "uniqueElement" "" )
 ##
@@ -2574,6 +2584,11 @@ $output#end##macro
             "title": "$cfgTypeDescription",
             "dataType": "DT-FormattedText",
 			"changedAt": "$templateTime"
+        }, {
+            "id": "PC-${idSta}-Type",
+            "title": "dcterms:type",
+            "dataType": "DT-ShortString",
+			"changedAt": "$templateTime"
 ## Add a property type per custom property of model elements:
 #writeCustomPropertyTypes( $idSta $idMEl "uniqueElement" "" )
 ##
@@ -2601,6 +2616,11 @@ $output#end##macro
             "id": "PC-${idEvt}-Text",
             "title": "$cfgTypeDescription",
             "dataType": "DT-FormattedText",
+			"changedAt": "$templateTime"
+        }, {
+            "id": "PC-${idEvt}-Type",
+            "title": "dcterms:type",
+            "dataType": "DT-ShortString",
 			"changedAt": "$templateTime"
 ## add a property type per custom property of model elements:
 #writeCustomPropertyTypes( $idEvt $idMEl "uniqueElement" "" )
@@ -2984,9 +3004,9 @@ $output#end##macro
             "class": "PC-${idFld}-Name",
             "value": "$cfgGlossaryChapterTitle"
         }, {
-            "title": "$cfgTypeDescription",
-            "class": "PC-${idFld}-Text",
-            "value": "<div/>"
+            "title": "dcterms:type",
+            "class": "PC-${idFld}-Type",
+            "value": "SpecIF:Glossary"
         }],
 		"changedAt": "$templateTime"
     }, {
