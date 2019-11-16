@@ -2498,7 +2498,7 @@ $output#end##macro
         "id": "RC-${prefix}",
         "title": "$cfgTypePlan",
         "description": "$cfgPlanDescription",
-        "instantiation": ["auto"],
+        "instantiation": ["user"],
 #if( $iconPln.length()>0 )
 		"icon": "${iconPln}",
 #end
