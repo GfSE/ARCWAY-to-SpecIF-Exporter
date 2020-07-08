@@ -68,7 +68,6 @@
 ## if true: custom properties of type 'file' are embedded into description properties, or as an additional property, otherwise:
 #set( $cfgFile_EmbeddedInObjectText = false )
 ##
-#set( $cfgTextAttributesAsXHTML = false )
 ##set( $cfgAppendRelations = false )## until rev=58
 ##
 ## Can be used to suppress all custom properties beginning with a certain substring, e.g. "custom.copilot"
@@ -85,17 +84,17 @@
 ##set( $prefixConversation = "CID-" )
 ##
 ## Identifier Prefixes
-#set( $idFld = "Fld" )
-#set( $idInf = "Inf" )
-#set( $idPln = "Pln" )
-#set( $idAct = "Act" )
-#set( $idSta = "Sta" )
-#set( $idEvt = "Evt" )
+#set( $idFld = "Folder" )
+#set( $idInf = "Info" )
+#set( $idPln = "Diagram" )
+#set( $idAct = "Actor" )
+#set( $idSta = "State" )
+#set( $idEvt = "Event" )
 #set( $idMEl = "MEl" )## used for data-types common to idAct/idSta/idEvt
-#set( $idReq = "Req" )
-#set( $idFea = "Fea" )
-#set( $idAnn = "Ann" )
-#set( $idIss = "Iss" )
+#set( $idReq = "Requirement" )
+#set( $idFea = "Feature" )
+#set( $idAnn = "Annotation" )
+#set( $idIss = "Issue" )
 #set( $idBom = "BoM" )
 #set( $idPlanShowsUniqueElementType = "SVis" )
 #set( $idMElContainsMElType = "SCtn" )
@@ -520,7 +519,6 @@
 #foreach( $val in $dataModelProvider.getAllowedValuesOfCustomProperty( $itemType, $customPropertyID ) )
 	#if( $val == "ReqIF: svg" ) #set( $planFileType = $planFileTypePng )
 	#elseif( $val == "ReqIF: png" ) #set( $planFilePngToo = false )
-	#elseif( $val == "ReqIF: Text attributes as XHTML" ) #set( $cfgTextAttributesAsXHTML = false )
 	#elseif( $val == "ReqIF: Plan embedded in object-text" ) #set( $cfgPlan_EmbeddedInObjectText = false )
 	#elseif( $val == "ReqIF: File embedded in object-text" ) #set( $cfgFile_EmbeddedInObjectText = false )
 ##	#elseif( $val == "ReqIF: Append relations" ) #set( $cfgAppendRelations = false )
@@ -530,7 +528,6 @@
 #foreach( $val in $item.getPropertyAsStringList( $customPropertyID ) )
 	#if( $val == "ReqIF: svg" ) #set( $planFileType = $planFileTypeSvg )
 	#elseif( $val == "ReqIF: png" ) #set( $planFilePngToo = true )
-	#elseif( $val == "ReqIF: Text attributes as XHTML" ) #set( $cfgTextAttributesAsXHTML = true )
 	#elseif( $val == "ReqIF: Plan embedded in object-text" ) #set( $cfgPlan_EmbeddedInObjectText = true )
 	#elseif( $val == "ReqIF: File embedded in object-text" ) #set( $cfgFile_EmbeddedInObjectText = true )
 ##	#elseif( $val == "ReqIF: Append relations" ) #set( $cfgAppendRelations = true )
@@ -976,11 +973,7 @@ $output#end##if
 	#elseif( $typeID.equals("string") )
             "dataType": "DT-String",
 	#elseif( $typeID.equals("text") )
-		#if( $cfgTextAttributesAsXHTML )
             "dataType": "DT-FormattedText",
-		#else
-            "dataType": "DT-Text",
-		#end##if
 	#elseif( $typeID.equals("url") )
             "dataType": "DT-FormattedText",
 	#elseif( $typeID.equals("enumeration_string_single") || $typeID.equals("enumeration_integer_single") )
@@ -1071,11 +1064,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
 	#elseif ( $typeID.equals("string") )
             "value": "$item.getPropertyAsString( $customPropertyID )"
 	#elseif ( $typeID.equals("text") )
-		#if( $cfgTextAttributesAsXHTML )
             "value": "<div>#writeTextAsXHTML( $item.getPropertyAsStringArray( $customPropertyID ) )</div>"
-		#else
-            "value": "#writeText( $item.getPropertyAsStringArray( $customPropertyID ))"
-		#end##if
 	#elseif ( $typeID.equals("url") )	                
             "value": "<div><a href=\"$item.getPropertyAsString( $customPropertyID )\">$item.getPropertyAsString( $customPropertyID )</a></div>"
     #elseif ( $typeID.equals("enumeration_string_single") || $typeID.equals("enumeration_integer_single") )
@@ -1127,10 +1116,10 @@ $output.replaceAll('\"', '\\\"')#end##macro
         "title": "$plan.getName()",
         "class": "RC-${prefix}",
         "properties": [{
-            "title": "$cfgTypeTitle",
-            "class": "PC-${prefix}-Name",
-            "value": "$plan.getName()"
-        }, {
+##          "title": "$cfgTypeTitle",
+##          "class": "PC-${prefix}-Name",
+##          "value": "$plan.getName()"
+##      }, {
             "title": "$cfgTypeDescription",
             "class": "PC-${prefix}-Text",
 #if( $cfgPlan_EmbeddedInObjectText )
@@ -1187,10 +1176,10 @@ $output.replaceAll('\"', '\\\"')#end##macro
             "class": "PC-${prefix}-ID",
             "value": "$req.getID()"
         }, {
-            "title": "$cfgTypeTitle",
-            "class": "PC-${prefix}-Name",
-            "value": "$req.getName()"
-        }, {
+##          "title": "$cfgTypeTitle",
+##          "class": "PC-${prefix}-Name",
+##          "value": "$req.getName()"
+##      }, {
             "title": "$cfgTypeDescription",
             "class": "PC-${prefix}-Text",
             "value": "<div>#writeDescription( $req )#embedFileRefs( $req )</div>"
@@ -1235,10 +1224,10 @@ $output.replaceAll('\"', '\\\"')#end##macro
         "title": "$MEl.getName()",
         "class": "RC-${pfx}",
         "properties": [{
-            "title": "$cfgTypeTitle",
-            "class": "PC-${pfx}-Name",
-            "value": "$MEl.getName()"
-        }, {
+##          "title": "$cfgTypeTitle",
+##          "class": "PC-${pfx}-Name",
+##          "value": "$MEl.getName()"
+##      }, {
             "title": "$cfgTypeDescription",
             "class": "PC-${pfx}-Text",
             "value": "<div>#writeDescription( $MEl )#embedFileRefs( $MEl )</div>"
@@ -1269,17 +1258,17 @@ $output.replaceAll('\"', '\\\"')#end##macro
 ##	#writeIssueNoteRow( $issue )
     }, {
         "id": "${prefix}-$issue.getUniqueIdentifier()",
-        "title": "$issue.getID()",
+        "title": "$issue.getTitle()",
         "class": "RC-${prefix}",
         "properties": [{
             "title": "$cfgTypeID",
             "class": "PC-${prefix}-ID",
             "value": "$issue.getID()"
         }, {
-            "title": "$cfgTypeTitle",
-            "class": "PC-${prefix}-Name",
-            "value": "$issue.getTitle()"
-        }, {
+##          "title": "$cfgTypeTitle",
+##          "class": "PC-${prefix}-Name",
+##          "value": "$issue.getTitle()"
+##      }, {
             "title": "$cfgTypeDescription",
             "class": "PC-${prefix}-Text",
             "value": "<div>#writeDescription( $issue )</div>"
@@ -1719,10 +1708,10 @@ $output.replaceAll('\"', '\\\"')#end##macro
         "title": "$folder.getName()",
         "class": "RC-${idFld}",
         "properties": [{
-            "title": "$cfgTypeTitle",
-            "class": "PC-${idFld}-Name",
-            "value": "$folder.getName()"
-        }, {
+##          "title": "$cfgTypeTitle",
+##          "class": "PC-${idFld}-Name",
+##          "value": "$folder.getName()"
+##      }, {
             "title": "$cfgTypeDescription",
             "class": "PC-${idFld}-Text",
             "value": "<div>#writeDescription( $folder )#embedFileRefs( $folder )</div>"
@@ -1750,10 +1739,10 @@ $output.replaceAll('\"', '\\\"')#end##macro
 		"title": "$cfgStrippedFolderNameBom",
         "class": "RC-${idFld}",
         "properties": [{
-            "title": "dcterms:title",
-            "class": "PC-${idFld}-Name",
-            "value": "$cfgStrippedFolderNameBom"
-        }, {
+##          "title": "$cfgTypeTitle",
+##          "class": "PC-${idFld}-Name",
+##          "value": "$cfgStrippedFolderNameBom"
+##      }, {
             "title": "dcterms:description",
             "class": "PC-${idFld}-Text",
 			"value": "<p>${cfgBomFolderDescription}</p>"
@@ -1777,10 +1766,10 @@ $output.replaceAll('\"', '\\\"')#end##macro
 		"title": "$reqSet.getName()",
         "class": "RC-${idFld}",
         "properties": [{
-            "title": "dcterms:title",
-            "class": "PC-${idFld}-Name",
-            "value": "$reqSet.getName()"
-        }, {
+##          "title": "$cfgTypeTitle",
+##          "class": "PC-${idFld}-Name",
+##          "value": "$reqSet.getName()"
+##      }, {
             "title": "dcterms:description",
             "class": "PC-${idFld}-Text",
 			"value": "<div>#writeDescription( $reqSet )</div>"
@@ -1810,10 +1799,10 @@ $output.replaceAll('\"', '\\\"')#end##macro
 		"title": "$issueSet.getName()",
         "class": "RC-${idFld}",
         "properties": [{
-            "title": "dcterms:title",
-            "class": "PC-${idFld}-Name",
-            "value": "$issueSet.getName()"
-        }, {
+##          "title": "$cfgTypeTitle",
+##          "class": "PC-${idFld}-Name",
+##          "value": "$issueSet.getName()"
+##      }, {
             "title": "dcterms:description",
             "class": "PC-${idFld}-Text",
 			"value": "<div>#writeDescription( $issueSet )</div>"
@@ -2281,7 +2270,7 @@ $output#end##macro
         "familyName": "von Dungern",
         "givenName": "Oskar",
         "org": {
-            "organizationName": "adesso AG"
+            "organizationName": "adesso SE"
         },
         "email": {
             "type": "text/html",
@@ -2465,11 +2454,11 @@ $output#end##macro
 #end
 		"isHeading": true,
         "propertyClasses": [{
-            "id": "PC-${idFld}-Name",
-            "title": "$cfgTypeTitle",
-            "dataType": "DT-ShortString",
-			"changedAt": "$templateTime"
-        }, {
+##          "id": "PC-${idFld}-Name",
+##          "title": "$cfgTypeTitle",
+##          "dataType": "DT-ShortString",
+##          "changedAt": "$templateTime"
+##      }, {
             "id": "PC-${idFld}-Text",
             "title": "$cfgTypeDescription",
             "dataType": "DT-FormattedText",
@@ -2503,11 +2492,11 @@ $output#end##macro
 		"icon": "${iconPln}",
 #end
         "propertyClasses": [{
-            "id": "PC-${prefix}-Name",
-            "title": "$cfgTypeTitle",
-            "dataType": "DT-ShortString",
-			"changedAt": "$templateTime"
-        }, {
+##          "id": "PC-${prefix}-Name",
+##          "title": "$cfgTypeTitle",
+##          "dataType": "DT-ShortString",
+##          "changedAt": "$templateTime"
+##      }, {
             "id": "PC-${prefix}-Text",
             "title": "$cfgTypeDescription",
             "dataType": "DT-FormattedText",
@@ -2542,11 +2531,11 @@ $output#end##macro
 		"icon": "${iconAct}",
 #end
         "propertyClasses": [{
-            "id": "PC-${idAct}-Name",
-            "title": "$cfgTypeTitle",
-            "dataType": "DT-ShortString",
-			"changedAt": "$templateTime"
-        }, {
+##          "id": "PC-${idAct}-Name",
+##          "title": "$cfgTypeTitle",
+##          "dataType": "DT-ShortString",
+##          "changedAt": "$templateTime"
+##      }, {
             "id": "PC-${idAct}-Text",
             "title": "$cfgTypeDescription",
             "dataType": "DT-FormattedText",
@@ -2575,11 +2564,11 @@ $output#end##macro
 		"icon": "${iconSta}",
 #end
         "propertyClasses": [{
-            "id": "PC-${idSta}-Name",
-            "title": "$cfgTypeTitle",
-            "dataType": "DT-ShortString",
-			"changedAt": "$templateTime"
-        }, {
+##          "id": "PC-${idSta}-Name",
+##          "title": "$cfgTypeTitle",
+##          "dataType": "DT-ShortString",
+##          "changedAt": "$templateTime"
+##      }, {
             "id": "PC-${idSta}-Text",
             "title": "$cfgTypeDescription",
             "dataType": "DT-FormattedText",
@@ -2608,11 +2597,11 @@ $output#end##macro
 		"icon": "${iconEvt}",
 #end
         "propertyClasses": [{
-            "id": "PC-${idEvt}-Name",
-            "title": "$cfgTypeTitle",
-            "dataType": "DT-ShortString",
-			"changedAt": "$templateTime"
-        }, {
+##          "id": "PC-${idEvt}-Name",
+##          "title": "$cfgTypeTitle",
+##          "dataType": "DT-ShortString",
+##          "changedAt": "$templateTime"
+##      }, {
             "id": "PC-${idEvt}-Text",
             "title": "$cfgTypeDescription",
             "dataType": "DT-FormattedText",
@@ -2696,11 +2685,11 @@ $output#end##macro
             "dataType": "DT-ShortString",
 			"changedAt": "$templateTime"
         }, {
-            "id": "PC-${prefix}-Name",
-            "title": "$cfgTypeTitle",
-            "dataType": "DT-ShortString",
-			"changedAt": "$templateTime"
-        }, {
+##          "id": "PC-${prefix}-Name",
+##          "title": "$cfgTypeTitle",
+##          "dataType": "DT-ShortString",
+##          "changedAt": "$templateTime"
+##      }, {
             "id": "PC-${prefix}-Text",
             "title": "$cfgTypeDescription",
             "dataType": "DT-FormattedText",
@@ -2761,11 +2750,11 @@ $output#end##macro
             "dataType": "DT-ShortString",
 			"changedAt": "$templateTime"
         }, {
-            "id": "PC-${prefix}-Name",
-            "title": "$cfgTypeTitle",
-            "dataType": "DT-ShortString",
-			"changedAt": "$templateTime"
-        }, {
+##          "id": "PC-${prefix}-Name",
+##          "title": "$cfgTypeTitle",
+##          "dataType": "DT-ShortString",
+##          "changedAt": "$templateTime"
+##      }, {
             "id": "PC-${prefix}-Text",
             "title": "$cfgTypeDescription",
             "dataType": "DT-FormattedText",
@@ -2953,11 +2942,11 @@ $output#end##macro
         "title": "SpecIF:Hierarchy",
         "description": "$cfgSpecDescription",
         "propertyClasses": [{
-            "id": "PC-ACProject-Name",
-            "title": "$cfgTypeTitle",
-            "dataType": "DT-ShortString",
-			"changedAt": "$templateTime"
-        }, {
+##          "id": "PC-ACProject-Name",
+##          "title": "$cfgTypeTitle",
+##          "dataType": "DT-ShortString",
+##			"changedAt": "$templateTime"
+##      }, {
             "id": "PC-ACProject-Text",
             "title": "$cfgTypeDescription",
             "dataType": "DT-FormattedText",
@@ -2976,10 +2965,10 @@ $output#end##macro
         "title": "$cfgProjectInformationChapterTitle",
         "class": "RC-${idFld}",
         "properties": [{
-            "title": "$cfgTypeTitle",
-            "class": "PC-${idFld}-Name",
-            "value": "$cfgProjectInformationChapterTitle"
-        }, {
+##          "title": "$cfgTypeTitle",
+##          "class": "PC-${idFld}-Name",
+##          "value": "$cfgProjectInformationChapterTitle"
+##      }, {
             "title": "$cfgTypeDescription",
             "class": "PC-${idFld}-Text",
             "value": "<div>#embedImgRef( $cfgProjectInformationChapterTitle, $fileName )#writeDescription( $project )#writeStakeholders( $stakeholders )#writeLegend()</div>"
@@ -3000,10 +2989,10 @@ $output#end##macro
         "title": "$cfgGlossaryChapterTitle",
         "class": "RC-${idFld}",
         "properties": [{
-            "title": "$cfgTypeTitle",
-            "class": "PC-${idFld}-Name",
-            "value": "$cfgGlossaryChapterTitle"
-        }, {
+##          "title": "$cfgTypeTitle",
+##          "class": "PC-${idFld}-Name",
+##          "value": "$cfgGlossaryChapterTitle"
+##      }, {
             "title": "dcterms:type",
             "class": "PC-${idFld}-Type",
             "value": "SpecIF:Glossary"
@@ -3014,10 +3003,10 @@ $output#end##macro
         "title": "$cfgActorsChapterTitle",
         "class": "RC-${idFld}",
         "properties": [{
-            "title": "$cfgTypeTitle",
-            "class": "PC-${idFld}-Name",
-            "value": "$cfgActorsChapterTitle"
-        }, {
+##          "title": "$cfgTypeTitle",
+##          "class": "PC-${idFld}-Name",
+##          "value": "$cfgActorsChapterTitle"
+##      }, {
             "title": "$cfgTypeDescription",
             "class": "PC-${idFld}-Text",
             "value": "<div><p>$cfgActorDescription</p></div>"
@@ -3028,10 +3017,10 @@ $output#end##macro
         "title": "$cfgStatesChapterTitle",
         "class": "RC-${idFld}",
         "properties": [{
-            "title": "$cfgTypeTitle",
-            "class": "PC-${idFld}-Name",
-            "value": "$cfgStatesChapterTitle"
-        }, {
+##          "title": "$cfgTypeTitle",
+##          "class": "PC-${idFld}-Name",
+##          "value": "$cfgStatesChapterTitle"
+##      }, {
             "title": "$cfgTypeDescription",
             "class": "PC-${idFld}-Text",
             "value": "<div><p>$cfgStateDescription</p></div>"
@@ -3042,10 +3031,10 @@ $output#end##macro
         "title": "$cfgEventsChapterTitle",
         "class": "RC-${idFld}",
         "properties": [{
-            "title": "$cfgTypeTitle",
-            "class": "PC-${idFld}-Name",
-            "value": "$cfgEventsChapterTitle"
-        }, {
+##          "title": "$cfgTypeTitle",
+##          "class": "PC-${idFld}-Name",
+##          "value": "$cfgEventsChapterTitle"
+##      }, {
             "title": "$cfgTypeDescription",
             "class": "PC-${idFld}-Text",
             "value": "<div><p>$cfgEventDescription</p></div>"
@@ -3136,11 +3125,11 @@ $output#end##macro
         "id": "$specID",
         "title": "${title}",
         "class": "HC-ACProject",
-		"properties": [{
-            "title": "$cfgTypeTitle",
-            "class": "PC-ACProject-Name",
-            "value": "${title}"
-		}],
+##		"properties": [{
+##          "title": "$cfgTypeTitle",
+##          "class": "PC-ACProject-Name",
+##          "value": "${title}"
+##		}],
         "nodes": [{
 #set( $itemCnt = 0 )
 ## Generate full document with the tree structure in Cockpit:
