@@ -1120,19 +1120,19 @@ $output.replaceAll('\"', '\\\"')#end##macro
 ##          "class": "PC-${prefix}-Name",
 ##          "value": "$plan.getName()"
 ##      }, {
-            "title": "$cfgTypeDescription",
+##          "title": "$cfgTypeDescription",
             "class": "PC-${prefix}-Text",
 #if( $cfgPlan_EmbeddedInObjectText )
             "value": "<div>#writeDescription( $plan )#embedPlanRef( $plan.getName(), $fileName )</div>"
 #else
             "value": "<div>#writeDescription( $plan )</div>"
         }, {
-            "title": "$cfgTypePlan",
+##          "title": "$cfgTypePlan",
             "class": "PC-${prefix}-Diagram",
             "value": "<div>#embedPlanRef( $plan.getName(), $fileName )</div>"
 #end##if
         }, {
-            "title": "$cfgTypeNotation",
+##          "title": "$cfgTypeNotation",
             "class": "PC-${prefix}-Notation",
             "value": "#writePlanType( $plan )"
 ## Create a PROPERTY-VALUE per ARCWAY Custom Property:
@@ -1172,7 +1172,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
         "title": "$req.getName()",
         "class": "RC-${prefix}",
         "properties": [{
-            "title": "$cfgTypeID",
+##          "title": "$cfgTypeID",
             "class": "PC-${prefix}-ID",
             "value": "$req.getID()"
         }, {
@@ -1180,11 +1180,11 @@ $output.replaceAll('\"', '\\\"')#end##macro
 ##          "class": "PC-${prefix}-Name",
 ##          "value": "$req.getName()"
 ##      }, {
-            "title": "$cfgTypeDescription",
+##          "title": "$cfgTypeDescription",
             "class": "PC-${prefix}-Text",
             "value": "<div>#writeDescription( $req )#embedFileRefs( $req )</div>"
         }, {
-            "title": "$cfgTypeStatus",
+##          "title": "$cfgTypeStatus",
             "class": "PC-${prefix}-Status",
 #if( $req.getState().length() > 0 ) 
             "value": "V-${idReq}-Status-#makeId( $req.getState() $allReqStatusValues )"
@@ -1192,7 +1192,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
             "value": ""
 #end				
         }, {
-            "title": "$cfgTypePriority",
+##          "title": "$cfgTypePriority",
             "class": "PC-${prefix}-Priority",
 #if( $req.getPriority().length() > 0 )
             "value": "V-${idReq}-Prio-#makeId( $req.getPriority() $allReqPrioValues )"
@@ -1228,7 +1228,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
 ##          "class": "PC-${pfx}-Name",
 ##          "value": "$MEl.getName()"
 ##      }, {
-            "title": "$cfgTypeDescription",
+##          "title": "$cfgTypeDescription",
             "class": "PC-${pfx}-Text",
             "value": "<div>#writeDescription( $MEl )#embedFileRefs( $MEl )</div>"
 ##
@@ -1261,7 +1261,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
         "title": "$issue.getTitle()",
         "class": "RC-${prefix}",
         "properties": [{
-            "title": "$cfgTypeID",
+##          "title": "$cfgTypeID",
             "class": "PC-${prefix}-ID",
             "value": "$issue.getID()"
         }, {
@@ -1269,11 +1269,11 @@ $output.replaceAll('\"', '\\\"')#end##macro
 ##          "class": "PC-${prefix}-Name",
 ##          "value": "$issue.getTitle()"
 ##      }, {
-            "title": "$cfgTypeDescription",
+##          "title": "$cfgTypeDescription",
             "class": "PC-${prefix}-Text",
             "value": "<div>#writeDescription( $issue )</div>"
         }, {
-            "title": "$cfgTypeStatus",
+##          "title": "$cfgTypeStatus",
             "class": "PC-${prefix}-Status",
 #if( $issue.getStatus().length() > 0 ) 
             "value": "V-${idIss}-Status-#makeId( $issue.getStatus() $allIssueStatusValues )"
@@ -1281,7 +1281,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
             "value": ""
 #end				
         }, {
-            "title": "$cfgTypePriority",
+##          "title": "$cfgTypePriority",
             "class": "PC-${prefix}-Priority",
 #if( $issue.getPriority().length() > 0 )
             "value": "V-${idIss}-Prio-#makeId( $issue.getPriority() $allIssuePrioValues )"
@@ -1289,14 +1289,14 @@ $output.replaceAll('\"', '\\\"')#end##macro
             "value": ""
 #end				
         }, {
-            "title": "$cfgTypeResponsible",
+##          "title": "$cfgTypeResponsible",
             "class": "PC-${prefix}-Responsible",
             "value": "$issue.getResponsible()"
 #set( $duedate = $issue.getDueDate_MilliSecondsSince_01_01_1970() )
 #if( $duedate && $duedate > 0 ) 
 #isoTime( $duedate, $isoDueDate )
         }, {
-            "title": "$cfgTypeDueDate",
+##          "title": "$cfgTypeDueDate",
             "class": "PC-${prefix}-DueDate",
             "value": "$isoDueDate"
 #end				
@@ -1712,7 +1712,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
 ##          "class": "PC-${idFld}-Name",
 ##          "value": "$folder.getName()"
 ##      }, {
-            "title": "$cfgTypeDescription",
+##          "title": "$cfgTypeDescription",
             "class": "PC-${idFld}-Text",
             "value": "<div>#writeDescription( $folder )#embedFileRefs( $folder )</div>"
         }],
@@ -1743,7 +1743,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
 ##          "class": "PC-${idFld}-Name",
 ##          "value": "$cfgStrippedFolderNameBom"
 ##      }, {
-            "title": "dcterms:description",
+##          "title": "dcterms:description",
             "class": "PC-${idFld}-Text",
 			"value": "<p>${cfgBomFolderDescription}</p>"
 		}],
@@ -1770,7 +1770,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
 ##          "class": "PC-${idFld}-Name",
 ##          "value": "$reqSet.getName()"
 ##      }, {
-            "title": "dcterms:description",
+##          "title": "dcterms:description",
             "class": "PC-${idFld}-Text",
 			"value": "<div>#writeDescription( $reqSet )</div>"
 		}],
@@ -1803,7 +1803,7 @@ $output.replaceAll('\"', '\\\"')#end##macro
 ##          "class": "PC-${idFld}-Name",
 ##          "value": "$issueSet.getName()"
 ##      }, {
-            "title": "dcterms:description",
+##          "title": "dcterms:description",
             "class": "PC-${idFld}-Text",
 			"value": "<div>#writeDescription( $issueSet )</div>"
 		}],
@@ -2969,7 +2969,7 @@ $output#end##macro
 ##          "class": "PC-${idFld}-Name",
 ##          "value": "$cfgProjectInformationChapterTitle"
 ##      }, {
-            "title": "$cfgTypeDescription",
+##          "title": "$cfgTypeDescription",
             "class": "PC-${idFld}-Text",
             "value": "<div>#embedImgRef( $cfgProjectInformationChapterTitle, $fileName )#writeDescription( $project )#writeStakeholders( $stakeholders )#writeLegend()</div>"
         }],
@@ -2993,7 +2993,7 @@ $output#end##macro
 ##          "class": "PC-${idFld}-Name",
 ##          "value": "$cfgGlossaryChapterTitle"
 ##      }, {
-            "title": "dcterms:type",
+##          "title": "dcterms:type",
             "class": "PC-${idFld}-Type",
             "value": "SpecIF:Glossary"
         }],
@@ -3007,7 +3007,7 @@ $output#end##macro
 ##          "class": "PC-${idFld}-Name",
 ##          "value": "$cfgActorsChapterTitle"
 ##      }, {
-            "title": "$cfgTypeDescription",
+##          "title": "$cfgTypeDescription",
             "class": "PC-${idFld}-Text",
             "value": "<div><p>$cfgActorDescription</p></div>"
         }],
@@ -3021,7 +3021,7 @@ $output#end##macro
 ##          "class": "PC-${idFld}-Name",
 ##          "value": "$cfgStatesChapterTitle"
 ##      }, {
-            "title": "$cfgTypeDescription",
+##          "title": "$cfgTypeDescription",
             "class": "PC-${idFld}-Text",
             "value": "<div><p>$cfgStateDescription</p></div>"
         }],
@@ -3035,7 +3035,7 @@ $output#end##macro
 ##          "class": "PC-${idFld}-Name",
 ##          "value": "$cfgEventsChapterTitle"
 ##      }, {
-            "title": "$cfgTypeDescription",
+##          "title": "$cfgTypeDescription",
             "class": "PC-${idFld}-Text",
             "value": "<div><p>$cfgEventDescription</p></div>"
         }],
