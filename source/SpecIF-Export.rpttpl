@@ -259,33 +259,34 @@
 #set( $cfgLabelUniqueElement = "Model-Element" )
 #set( $cfgPlanShowsUniqueElementType = "Visibility" )
 #set( $cfgLabelPlanShowsUniqueElement = "shows")
-##set( $cfgLabelMElOnPlan = "is visible on")
 ##set( $cfgLabelUniqueElementRequirements = "Requirements" )
 ##set( $cfgLabelUniqueElementIssues = "Open Issues" )
 ##set( $cfgLabelUniqueElementUseCases = "Use cases" )
 ##set( $cfgLabelUniqueElementUseCaseSteps = "Use case steps" )
 #set( $cfgMElLinkedRequirementType = "Satisfaction")
 #set( $cfgLabelMElLinkedRequirement = "satisfies")
-#set( $cfgLabelMElLinkedAnnotation = "refers to")
 #set( $cfgMElLinkedAnnotationType = "Annotation")
+#set( $cfgLabelMElLinkedAnnotation = "refers to")
 #set( $cfgMElContainsMElType = "Containment" )
 #set( $cfgMElPrecedesMElType = "Precedence" )
 #set( $cfgLabelMElContainsMEl = "contains" )
 #set( $cfgLabelMElPrecedesMEl = "precedes" )
-#set( $cfgMElWritesAndReadsMElType = "Storage" )
-#set( $cfgLabelMElWritesAndReadsMEl = "stores" )
+## A 'writesAndReads' relation is transformed to a 'writes' plus 'reads' relation:
+##set( $cfgMElWritesAndReadsMElType = "Storage" )
+##set( $cfgLabelMElWritesAndReadsMEl = "stores" )
 #set( $cfgMElWritesMElType = "Writing" )
 #set( $cfgLabelMElWritesMEl = "writes" )
 #set( $cfgMElReadsMElType = "Reading" )
 #set( $cfgLabelMElReadsMEl = "reads" )
+## A 'communicates' relation is transformed to a 'sendsTo' plus 'receivesFrom' relation:
 ##set( $cfgMElCommunicatesWithMElType = "Communication" )
 ##set( $cfgLabelMElCommunicatesWithMEl = "communicates with" )
 #set( $cfgMElSendsToMElType = "Sending" )
 #set( $cfgLabelMElSendsToMEl = "sends to" )
-#set( $cfgMElInfluencesMElType = "Influence" )
-#set( $cfgLabelMElInfluencesMEl = "influences" )
 ##set( $cfgMElReceivesFromMElType = "Receiving" )
 ##set( $cfgLabelMElReceivesFromMEl = "receives from" )
+#set( $cfgMElInfluencesMElType = "Influence" )
+#set( $cfgLabelMElInfluencesMEl = "influences" )
 ##
 #set( $cfgLabelFolder = "Folder" )
 ##set( $cfgRequirementsChapterTitle = "Requirements" )
@@ -378,33 +379,24 @@
 ##set( $cfgLabelAppendedRelations = "Aussagen" )
 ##
 #set( $cfgLabelUniqueElement = "Modellelement" )
-##set( $cfgPlanShowsUniqueElementType = "Visualisierung" )
 #set( $cfgLabelPlanShowsUniqueElement = "zeigt")   
-##set( $cfgLabelMElOnPlan = "ist sichtbar auf")   
 #set( $cfgLabelUniqueElementRequirements = "Anforderungen" )
 #set( $cfgLabelUniqueElementIssues = "Offene Punkte" )
 ##set( $cfgLabelUniqueElementUseCases = "Nutzungsfälle" )
 ##set( $cfgLabelUniqueElementUseCaseSteps = "Use case steps" )
-##set( $cfgMElLinkedRequirementType = "Satisfaction")
 #set( $cfgLabelMElLinkedRequirement = "erfüllt")
 #set( $cfgLabelMElLinkedAnnotation = "bezieht sich auf")
-##set( $cfgMElContainsMElType = "Containment" )
 #set( $cfgLabelMElContainsMEl = "enthält" )
 #set( $cfgLabelMElPrecedesMEl = "kommt vor" )
-##set( $cfgMElWritesAndReadsMElType = "Storage" )
-#set( $cfgLabelMElWritesAndReadsMEl = "speichert" )
-##set( $cfgMElWritesMElType = "Writing" )
+## A 'writesAndReads' relation is transformed to a 'writes' plus 'reads' relation:
+##set( $cfgLabelMElWritesAndReadsMEl = "speichert" )
 #set( $cfgLabelMElWritesMEl = "schreibt" )
-##set( $cfgMElReadsMElType = "Reading" )
 #set( $cfgLabelMElReadsMEl = "liest" )
-##set( $cfgMElCommunicatesWithMElType = "Communication" )
+## A 'communicates' relation is transformed to a 'sendsTo' plus 'receivesFrom' relation:
 ##set( $cfgLabelMElCommunicatesWithMEl = "kommuniziert mit" )
-##set( $cfgMElSendsToMElType = "Sending" )
 #set( $cfgLabelMElSendsToMEl = "sendet an" )
-##set( $cfgMElInfluencesMElType = "Influence" )
-#set( $cfgLabelMElInfluencesMEl = "beeinflusst" )
-##set( $cfgMElReceivesFromMElType = "Receiving" )
 ##set( $cfgLabelMElReceivesFromMEl = "empfängt von" )
+#set( $cfgLabelMElInfluencesMEl = "beeinflusst" )
 ##
 #set( $cfgLabelFolder = "Ordner" )
 ##set( $cfgRequirementsChapterTitle = "Anforderungen" )
@@ -415,7 +407,6 @@
 ##set( $cfgLabelRequirementReferenceType = "Abhängigkeit" )
 #set( $cfgLabelRequirementReferring = "ist abhängig von" )
 ##set( $cfgLabelRequirementReferred = "unterstützt" )
-##set( $cfgRequirementLinkedElementType = "Impact")
 ##set( $cfgLabelRequirementLinkedElementType = "Erfüllung")
 ##set( $cfgLabelRequirementLinkedElement = "ist zu erfüllen von")       
 ##set( $cfgLabelRequirementLinkedPlans = "sichtbar auf")
@@ -438,7 +429,6 @@
 ##set( $cfgLabelIssueResponsible = "Verantwortlicher" )
 ##set( $cfgLabelIssueDueDate = "Termin" )
 ##set( $cfgLabelIssueNotes = $cfgLabelRequirementNotes )
-##set( $cfgIssueLinkType = "Concern")
 ##set( $cfgLabelIssueLinkType = "Bezug")
 #set( $cfgLabelIssueLink = "bezieht sich auf")
 ##
@@ -2831,6 +2821,14 @@ $output#end##macro
         "subjectClasses": ["RC-$idAct"],
         "objectClasses": ["RC-$idSta"],
         "changedAt": "$templateTime"
+##    }, {
+##        "id": "SC-$cfgMElCommunicatesWithMElType",
+##        "title": "$cfgTypeMElCommunicatesWithMEl",
+##        "description": "$cfgLabelActor $cfgLabelMElCommunicatesWithMEl $cfgLabelActor",
+##        "instantiation": ["auto"],
+##        "subjectClasses": ["RC-$idAct"],
+##        "objectClasses": ["RC-$idAct"],
+##        "changedAt": "$templateTime"
     }, {
         "id": "SC-$cfgMElSendsToMElType",
         "title": "$cfgTypeMElSendsToMEl",
